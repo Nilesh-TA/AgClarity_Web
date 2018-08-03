@@ -1,0 +1,328 @@
+<div class="wrraper top-wrap clearfix">
+  <!-- Dropdowns -->
+  <app-common-nav-top [masterData]="pageName"></app-common-nav-top>
+  <!-- Dropdowns -->
+
+  <div class="pt10">
+    <form class="form-horizontal" novalidate [formGroup]="viewForm">
+      <div class="">
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="last_name">Last Name: *</label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <input type="text" class="form-control" id="last_name" formControlName="last_name" placeholder="Last Name" name="last_name"
+              readonly />
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="first_name">First Name: *</label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <input type="text" class="form-control" id="first_name" formControlName="first_name" placeholder="First Name" name="first_name"
+              readonly />
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="title">Title:</label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <input type="text" class="form-control" id="title" formControlName="title" placeholder="Title" name="title" readonly />
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="phone">Phone:</label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12 row">
+            <div class="col-md-7">
+              <input type="text" class="form-control display-inline" id="phone" formControlName="phone" name="phone" placeholder="(123) 456-7890"
+                [textMask]="{mask: phone_mask}" readonly />
+            </div>
+            <div class="col-md-4 m-n p-n">
+              <select class="form-control display-inline" id="phone_source" name="phone_source" formControlName="phone_source" disabled>
+                <option value="">-- Select Type --</option>
+                <option *ngFor="let contactSource of contactSourceList" [ngValue]="contactSource.value">
+                  {{ contactSource.description }}
+                </option>
+              </select>
+            </div>
+            <div class="col-md-1 m-t-sm p-n">
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <!-- Manage Multiple Phones -->
+        <div formArrayName="phones">
+          <div class="form-group" *ngFor="let item of getControls(viewForm,'phones'); let i = index;" [formGroupName]="i">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12 row">
+              <div class="col-md-7">
+                <input type="text" class="form-control display-inline" id="phone" formControlName="phone" name="phone" placeholder="(123) 456-7890"
+                  [textMask]="{mask: phone_mask}" readonly />
+              </div>
+              <div class="col-md-4 m-n p-n">
+                <select class="form-control display-inline" id="phone_source" name="phone_source" formControlName="phone_source" disabled>
+                  <option value="">-- Select Type --</option>
+                  <option *ngFor="let contactSource of contactSourceList" [ngValue]="contactSource.value">
+                    {{ contactSource.description }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-1 m-t-sm p-n">
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+        <!-- Manage Multiple Phones -->
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="email">Email: *</label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12 row">
+            <div class="col-md-7">
+              <input type="text" class="form-control display-inline" id="email" formControlName="email" placeholder="Email" name="email"
+                readonly />
+            </div>
+            <div class="col-md-4 m-n p-n">
+              <select class="form-control display-inline" id="email_source" name="email_source" formControlName="email_source" disabled>
+                <option value="">-- Select Type --</option>
+                <option *ngFor="let contactSource of contactSourceList" [ngValue]="contactSource.value">
+                  {{ contactSource.description }}
+                </option>
+              </select>
+            </div>
+            <div class="col-md-1 m-t-sm p-n">
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <!-- Manage Multiple Emails -->
+        <div formArrayName="emails">
+          <div class="form-group" *ngFor="let item of getControls(viewForm,'emails'); let i = index;" [formGroupName]="i">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12 row">
+              <div class="col-md-7">
+                <input type="text" class="form-control display-inline" id="email" formControlName="email" placeholder="Email" name="email"
+                  readonly />
+              </div>
+              <div class="col-md-4 m-n p-n">
+                <select class="form-control display-inline" id="email_source" name="email_source" formControlName="email_source" disabled>
+                  <option value="">-- Select Type --</option>
+                  <option *ngFor="let contactSource of contactSourceList" [ngValue]="contactSource.value">
+                    {{ contactSource.description }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-1 m-t-sm p-n">
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+        <!-- Manage Multiple Emails -->
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="preferred_contact_method">Preferred Contact Method: *</label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <select class="form-control" id="preferred_contact_method" name="preferred_contact_method" formControlName="preferred_contact_method"
+              disabled>
+              <option value="">-- Select Preferred Contact Method --</option>
+              <option *ngFor="let contactMethod of contactMethodList" [ngValue]="contactMethod.value">
+                {{ contactMethod.value }}
+              </option>
+            </select>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="secondary_contact_method">Secondary Contact Method:</label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <select class="form-control" id="secondary_contact_method" name="secondary_contact_method" formControlName="secondary_contact_method"
+              disabled>
+              <option value="">-- Select Secondary Contact Method --</option>
+              <option *ngFor="let contactMethod of contactMethodList" [ngValue]="contactMethod.value">
+                {{ contactMethod.value }}
+              </option>
+            </select>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="address_1">Mailing Address: </label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <textarea class="form-control" formControlName="address_1" id="address_1" placeholder="Mailing Address" name="address_1"
+              rows="3" readonly></textarea>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="address_2">Address 2: </label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <textarea class="form-control" formControlName="address_2" id="address_2" placeholder="Address 2" name="address_2" rows="3"
+              readonly></textarea>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="city">City: </label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <input type="text" class="form-control" id="city" formControlName="city" placeholder="City" name="city" readonly />
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="state">State:</label>
+          </div>
+          <div class="col-sm-12 col-md-9 col-xs-12 padding-zero">
+            <div class="col-md-3 col-sm-12 form-group">
+              <input type="text" class="form-control" formControlName="state" id="state" placeholder="State" name="state" readonly />
+            </div>
+
+            <div class="col-md-5 col-sm-12 form-group padding-zero">
+              <div class="col-sm-12 col-md-5 col-xs-12">
+                <label class="control-label" for="postal_code">Postal Code: *</label>
+              </div>
+              <div class="col-sm-12 col-md-7 col-xs-12 padding-left-media padding-right-media">
+                <input type="text" class="form-control" formControlName="postal_code" id="postal_code" placeholder="Postal Code" name="postal_code"
+                  readonly />
+              </div>
+            </div>
+
+            <div class="col-md-4 col-sm-12 form-group padding-zero">
+              <div class="col-sm-12 col-md-3 col-xs-12">
+                <label class="control-label" for="country">Country:</label>
+              </div>
+              <div class="col-sm-12 col-md-9 col-xs-12 padding-left-media padding-right-media">
+                <select class="form-control" id="country" name="country" formControlName="country" disabled>
+                  <option value="">-- Select Country --</option>
+                  <option *ngFor="let country of countryList" [ngValue]="country.value">
+                    {{ country.value }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="access_role">Role: *</label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <select class="form-control" id="access_role" name="access_role" formControlName="access_role" disabled>
+              <option value="">-- Select Role --</option>
+              <option *ngFor="let role of roleList" [ngValue]="role.value">
+                {{ role.value }}
+              </option>
+            </select>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="responsibility_level">Responsibility Level:</label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <select class="form-control" id="responsibility_level" name="responsibility_level" formControlName="responsibility_level"
+              disabled>
+              <option value="">-- Select Responsibility Level --</option>
+              <option *ngFor="let contactType of contactTypeList" [ngValue]="contactType.value">
+                {{ contactType.value }}
+              </option>
+            </select>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="language">Language:</label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <select class="form-control" id="language" name="language" formControlName="language" disabled>
+              <option value="">-- Select Language --</option>
+              <option *ngFor="let language of languageList" [ngValue]="language.value">
+                {{ language.value }}
+              </option>
+            </select>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="companyName">Companies Access: </label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12 m-l-md">
+            <ul *ngFor="let item of companyAccessList" class="c">
+              <li>{{ item.company_name }}</li>
+            </ul>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label">Micro-Apps Access: </label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12 m-l-md">            
+            <ul *ngFor="let item of contactAccessList" class="c">
+              <li>{{ item.companyName }}</li>
+              <ul class="b m-l-xl">
+                <li *ngFor="let micro_app of item.micro_apps">
+                  {{ micro_app }}
+                </li>
+              </ul>
+            </ul>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+      </div>
+
+      <div class="col-md-12 col-sm-12 col-xs-12 padding-zero mb20">
+        <hr>
+        <div class="float-right">
+          <a href="javascript:void(0);" (click)="backToList()">
+            <i class="fa fa-times-circle cancel_icon"></i>
+          </a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

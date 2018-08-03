@@ -1,0 +1,168 @@
+.table-recom thead th:first-child,
+.table-recom tbody th:first-child{
+    text-align: center !important;
+}
+
+.table-recom thead th,
+.table-recom thead td{
+    cursor: pointer !important;
+}
+
+.text-center{
+    text-align: center !important;
+}
+.text-left{
+    text-align: left !important;
+}
+.text-right{
+    text-align: right !important;
+}
+.form-control {
+    border-radius: 0;
+}
+.margin-auto {
+    margin: auto;
+    display: block;
+}
+
+/*** Loader Start */
+.loader {
+    height: 100%;
+    position: fixed;
+    padding-top: 15%;
+    width: 100%;
+    z-index: 999;
+    display: none;
+    background-color:rgba(230, 230, 230, 0.4);    
+    text-align: center;
+}
+.loader2 {
+    position: absolute;
+    display:block;
+    background-color:rgba(230, 230, 230, 0.7);
+    text-align: center;
+}
+/*** Loader End */
+
+
+/** Status Switch Toggle ***/
+
+.switch-toggle {
+    width: 34px;
+    height: 22px;
+    position: absolute;    
+    top: 4px;
+}
+
+.switch-toggle input {display:none;}
+
+.slider-toggle-btn {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #dce6ee;
+  -webkit-transition: .4s;
+  transition: .4s;
+  box-shadow: inset -1px 4px 7px -2px rgb(203, 207, 210);
+}
+
+.slider-toggle-btn:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider-toggle-btn {
+  background-color: #6fc82a;
+  box-shadow: inset -1px 4px 7px -2px rgb(89, 157, 35);
+}
+
+input:focus + .slider-toggle-btn {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider-toggle-btn:before {
+  -webkit-transform: translateX(12px);
+  -ms-transform: translateX(12px);
+  transform: translateX(12px);
+}
+
+/* Rounded sliders */
+.slider-toggle-btn.round {
+  border-radius: 34px;
+}
+
+.slider-toggle-btn.round:before {
+  border-radius: 50%;
+}
+/** Status Toggle ***/
+
+
+/*** Date Picker ***/
+/* 
+.mydp .selectiongroup:focus, .mydp .selectiongroup:active {
+    border: 1px solid #70c82a;
+    box-shadow: none;
+    outline: 0;
+} */
+
+.mydp .selectiongroup input:focus, .mydp .selectiongroup input:active {
+    border: none !important;
+}
+/* :focus {
+    outline: 0;
+} */
+.mydp, .mydp .headertodaybtn, .mydp .selection, .mydp .selectiongroup, .mydp .selector {
+    border-radius: 0 !important;
+}
+.mydp .selection {
+    padding: 0 10px !important;
+}
+
+/*** Date Picker ***/
+
+
+/***** Font ******/
+.font_8 {
+    font-size:8px !important;
+}
+.font_10 {
+    font-size:10px !important;
+}
+.font_12 {
+    font-size:12px !important;
+}
+.font_15 {
+    font-size:15px !important;
+}
+.font_18 {
+    font-size:15px !important;
+}
+.font_20 {
+    font-size:20px !important;
+}
+.font_22 {
+    font-size:22px !important;
+}
+.font_25 {
+    font-size:25px !important;
+}
+.font_50 {
+    font-size:50px !important;
+}
+.font_75 {
+    font-size:75px !important;
+}
+.font_100 {
+    font-size:100px !important;
+}
+

@@ -1,0 +1,27 @@
+@media (max-width: 850px) {
+    .box-location-inp {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    .text-left-media {
+        text-align: left !important;
+    }
+    .padding-left-media {
+        padding-left: 0;
+    }
+    .padding-right-media {
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 575px) {
+    
+}
+
+@media (max-width: 450px){
+    .login_width {
+        width: auto;
+    }
+}

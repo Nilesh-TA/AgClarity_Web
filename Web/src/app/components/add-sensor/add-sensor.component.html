@@ -1,0 +1,243 @@
+<div class="wrraper top-wrap clearfix">
+    <!-- Dropdowns -->
+    <app-common-nav-top [masterData]="pageName"></app-common-nav-top>
+    <!-- Dropdowns -->
+
+    <div class="pt10">
+        <form class="form-horizontal" novalidate [formGroup]="addForm" (submit)="onSubmit()">
+            <div class="">
+                <div class="form-group">
+                    <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                        <label class="control-label" for="name">Sensor ID: *</label>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                        <input type="text" class="form-control" id="sensorid" formControlName="sensorid" placeholder="Sensor Id" name="sensorid"
+                            [ngClass]="{'is-invalid':sensorFormErrors.sensorid, '': !sensorFormErrors.sensorid}">
+                        <div [hidden]="!sensorFormErrors.sensorid" class="invalid-feedback">
+                            {{ sensorFormErrors.sensorid }}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <!-- Name -->
+                <div class="form-group">
+                    <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                        <label class="control-label" for="name">Name: *</label>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                        <input type="text" class="form-control" id="name" formControlName="name" placeholder="Name" name="name" [ngClass]="{'is-invalid':sensorFormErrors.name, '': !sensorFormErrors.name}">
+                        <div [hidden]="!sensorFormErrors.name" class="invalid-feedback">
+                            {{ sensorFormErrors.name }}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <!-- type -->
+                <div class="form-group">
+                    <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                        <label class="control-label" for="sensorType">Type: *</label>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                        <select class="form-control" id="type" name="type" formControlName="type" [ngClass]="{'is-invalid':sensorFormErrors.type, '': !sensorFormErrors.type}">
+                            <option value="">-- Select Sensor Type --</option>
+                            <option *ngFor="let sensorType of sensorTypeList" [ngValue]="sensorType.value">
+                                {{ sensorType.value }}
+                            </option>
+                        </select>
+                        <div [hidden]="!sensorFormErrors.type" class="invalid-feedback">
+                            {{ sensorFormErrors.type }}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <!-- manufacturer -->
+                <div class="form-group">
+                    <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                        <label class="control-label" for="manufacturer">Manufacturer:</label>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                        <select class="form-control" id="manufacturer" name="manufacturer" formControlName="manufacturer">
+                            <option value="">-- Select Manufacturer Type --</option>
+                            <option *ngFor="let manufacturerType of manufacturerTypeList" [ngValue]="manufacturerType.value">
+                                {{ manufacturerType.value }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="">
+                    <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                        <label class="control-label" for="model">Model:</label>
+                    </div>
+                    <div class="col-sm-12 col-md-9 col-xs-12 padding-zero">
+                        <div class="col-md-3 col-sm-12 form-group">
+                            <input type="text" class="form-control" formControlName="model" id="model" placeholder="Model" name="model">
+                        </div>
+                        <div class="col-md-5 col-sm-12 form-group padding-zero">
+                            <div class="col-sm-12 col-md-5 col-xs-12">
+                                <label class="control-label" for="version">Version: </label>
+                            </div>
+                            <div class="col-sm-12 col-md-7 col-xs-12 padding-left-media padding-right-media">
+                                <input type="text" class="form-control" formControlName="version" id="version" placeholder="Version" name="version">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                        <label class="control-label" for="description">Description: </label>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                        <textarea class="form-control" formControlName="description" id="description" placeholder="Description" name="description"
+                            rows="2"></textarea>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                        <label class="control-label" for="mac_address">MAC Address: </label>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                        <input type="text" class="form-control" id="mac_address" formControlName="name" placeholder="Mac Address" name="chipset">
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                        <label class="control-label" for="chipset">Chipset: </label>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                        <input type="text" class="form-control" id="chipset" formControlName="chipset" placeholder="Chipset" name="chipset">
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                        <label class="control-label" for="status">Status: </label>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                        <label class="switch-toggle">
+                            <input type="checkbox" id="status" name="status" formControlName="status">
+                            <span class="slider-toggle-btn round"></span>
+                        </label>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                        <label class="control-label" for="first_install_date">First Install: </label>
+                    </div>
+                    <div class="col-sm-12 col-md-4 col-lg-4 col-xs-12">
+                        <my-date-picker                             
+                            formControlName="first_install_date" 
+                            id="first_install_date" 
+                            name="first_install_date" 
+                            [placeholder]="date_placeholder"
+                            [options]="myDatePickerOptions">
+                        </my-date-picker>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                        <label class="control-label" for="last_install_date">Last Install: </label>
+                    </div>
+                    <div class="col-sm-12 col-md-4 col-lg-4 col-xs-12">                        
+                        <my-date-picker                             
+                            formControlName="last_install_date" 
+                            id="last_install_date" 
+                            name="last_install_date" 
+                            [placeholder]="date_placeholder"
+                            [options]="myDatePickerOptions">
+                        </my-date-picker>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                        <label class="control-label" for="calibration_date">Calibration: </label>
+                    </div>
+                    <div class="col-sm-12 col-md-4 col-lg-4 col-xs-12">                        
+                        <my-date-picker                             
+                            formControlName="calibration_date" 
+                            id="calibration_date" 
+                            name="calibration_date" 
+                            [placeholder]="date_placeholder"
+                            [options]="myDatePickerOptions">
+                        </my-date-picker>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                        <label class="control-label" for="last_service_date">Last Service: </label>
+                    </div>
+                    <div class="col-sm-12 col-md-4 col-lg-4 col-xs-12">                        
+                        <my-date-picker                             
+                            formControlName="last_service_date" 
+                            id="last_service_date" 
+                            name="last_service_date" 
+                            [placeholder]="date_placeholder"
+                            [options]="myDatePickerOptions">
+                        </my-date-picker>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                        <label class="control-label" for="battery_install_date">Battery Install: </label>
+                    </div>
+                    <div class="col-sm-12 col-md-4 col-lg-4 col-xs-12">                        
+                        <my-date-picker                             
+                            formControlName="battery_install_date" 
+                            id="battery_install_date" 
+                            name="battery_install_date" 
+                            [placeholder]="date_placeholder"
+                            [options]="myDatePickerOptions">
+                        </my-date-picker>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                        <label class="control-label" for="sensor_set_point">Set Point: </label>
+                    </div>
+                    <div class="col-sm-12 col-md-4 col-lg-4 col-xs-12">                        
+                        <my-date-picker                             
+                            formControlName="sensor_set_point" 
+                            id="sensor_set_point" 
+                            name="sensor_set_point" 
+                            [placeholder]="date_placeholder"
+                            [options]="myDatePickerOptions">
+                        </my-date-picker>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12 padding-zero mb20">
+                <hr>
+                <div class="float-right">
+                    <a href="javascript:void(0);" class="mr10">
+                        <i class="fa fa-map-marker map_icon"></i>
+                    </a>
+                    <a href="javascript:void(0);" class="mr10" (click)="onSubmit()">
+                        <i class="fa fa-check-circle save_icon"></i>
+                    </a>
+                    <a href="javascript:void(0);" (click)="backToList()">
+                        <i class="fa fa-times-circle cancel_icon"></i>
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>

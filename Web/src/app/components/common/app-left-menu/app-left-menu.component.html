@@ -1,0 +1,165 @@
+<aside id="left-panel" class="left-panel">
+  <nav class="navbar navbar-expand-sm navbar-default">
+    <div class="navbar-header">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <i class="zmdi zmdi-menu"></i>
+      </button>
+      <a class="navbar-brand" [routerLink]="['/home']" routerLinkActive="active">
+        <img src="assets/img/logotype.png" alt="Logo">
+      </a>
+    </div>
+    <div id="main-menu" class="main-menu collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="menu-item-has-children dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="triangle"></span>
+            <i class="zmdi zmdi-icon">
+              <img src="assets/img/dashboard-icon.png" class="icon-dsh" alt="icon">
+            </i>Dashboards</a>
+          <ul class="sub-menu children dropdown-menu">
+            <li>
+              <i class="zmdi zmdi-link"></i>
+              <a class="pagelink" [routerLink]="['/set-data']" routerLinkActive="active">Set Default Data</a>
+            </li>
+            <li>
+              <i class="zmdi zmdi-link"></i>
+              <a class="pagelink" [routerLink]="['/home']" routerLinkActive="active">Link</a>
+            </li>
+            <li>
+              <i class="zmdi zmdi-link"></i>
+              <a class="pagelink" [routerLink]="['/home']" routerLinkActive="active">Link</a>
+            </li>
+          </ul>
+        </li>
+        <!-- <li class="menu-item-has-children dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="triangle"></span>
+            <i class="zmdi zmdi-notifications-active"></i>ATR</a>
+          <ul class="sub-menu children dropdown-menu">
+            <li>
+              <i class="zmdi zmdi-link"></i>
+              <a href="#">Link</a>
+            </li>
+            <li>
+              <i class="zmdi zmdi-link"></i>
+              <a href="#">Link</a>
+            </li>
+            <li>
+              <i class="zmdi zmdi-link"></i>
+              <a href="#">Link</a>
+            </li>
+          </ul>
+        </li>
+        <li class="menu-item-has-children dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="triangle"></span>
+            <i class="zmdi zmdi-chart"></i>Analytics</a>
+          <ul class="sub-menu children dropdown-menu">
+            <li>
+              <i class="zmdi zmdi-link"></i>
+              <a href="#">Link</a>
+            </li>
+            <li>
+              <i class="zmdi zmdi-link"></i>
+              <a href="#">Link</a>
+            </li>
+          </ul>
+        </li> -->
+        <li class="menu-item-has-children dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="triangle"></span>
+            <i class="zmdi zmdi-flower-alt"></i>ASD Admin</a>
+          <ul class="sub-menu children dropdown-menu">
+            <li>
+              <i class="zmdi zmdi-link"></i>
+              <!-- <a routerLink="/list-company" routerLinkActive="active-link">Company</a> -->
+              <a class="pagelink" (click)="redirectTo('Company')">Company</a>
+            </li>
+            <li>
+              <i class="zmdi zmdi-link"></i>
+              <a class="pagelink" (click)="redirectTo('Chemical')">Chemical</a>
+            </li>
+            <li>
+              <i class="zmdi zmdi-link"></i>
+              <a class="pagelink" (click)="redirectTo('Crop')">Crop</a>
+            </li>
+            <li>
+              <i class="zmdi zmdi-link"></i>
+              <a class="pagelink" (click)="redirectTo('Disease')">Disease</a>
+            </li>
+            <li>
+              <i class="zmdi zmdi-link"></i>
+              <a class="pagelink" (click)="redirectTo('Pest')">Pest</a>
+            </li>
+            <li>
+              <i class="zmdi zmdi-link"></i>
+              <a class="pagelink" (click)="redirectTo('Sensor')">Sensor</a>
+            </li>
+            <li>
+              <i class="zmdi zmdi-link"></i>
+              <a class="pagelink" (click)="redirectTo('Subscription')">Subscriptions</a>
+            </li>
+          </ul>
+        </li>
+        <li class="menu-item-has-children dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="triangle"></span>
+            <i class="zmdi zmdi-settings"></i>Admin</a>
+          <ul class="sub-menu children dropdown-menu">
+            <li>
+              <i class="zmdi zmdi-link"></i>              
+              <a class="pagelink" (click)="redirectTo('ContactProfile')">Contact Profile</a>
+            </li>
+            <li>
+              <i class="zmdi zmdi-link"></i>
+              <a class="pagelink" (click)="redirectTo('Location')">Location</a>
+            </li>
+            <li>
+              <i class="zmdi zmdi-link"></i>
+              <a class="pagelink" (click)="redirectTo('Irrigation')">Irrigation</a>
+            </li>
+            <li>
+              <i class="zmdi zmdi-link"></i>
+              <a class="pagelink" (click)="redirectTo('WaterSource')">Water Source</a>
+            </li>            
+          </ul>
+        </li>
+        <!-- <li class="menu-item-has-children dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="triangle"></span>
+            <i class="zmdi zmdi-sun"></i>Weather</a>
+          <ul class="sub-menu children dropdown-menu">
+            <li>
+              <i class="zmdi zmdi-link"></i>
+              <a href="#">Link</a>
+            </li>
+            <li>
+              <i class="zmdi zmdi-link"></i>
+              <a href="#">Link</a>
+            </li>
+          </ul>
+        </li>
+        <li class="menu-item-has-children dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="triangle"></span>
+            <i class="zmdi zmdi-calendar"></i>Calendar </a>
+          <ul class="sub-menu children dropdown-menu">
+            <li>
+              <i class="zmdi zmdi-link"></i>
+              <a href="#">Link</a>
+            </li>
+            <li>
+              <i class="zmdi zmdi-link"></i>
+              <a href="#">Link</a>
+            </li>
+            <li>
+              <i class="zmdi zmdi-link"></i>
+              <a href="#">Link</a>
+            </li>
+          </ul>
+        </li> -->
+      </ul>
+    </div>
+  </nav>
+</aside>

@@ -1,0 +1,84 @@
+<div class="wrraper top-wrap clearfix">
+
+  <!-- Dropdowns -->
+  <div class="box-location-inp">
+    <span class="inner-txt-location">Master Data</span>
+    <input type="text" class="input-effect" [(ngModel)]="pageName">
+  </div>
+  <!-- Dropdowns -->
+  <div class="pt10">
+    <form class="form-horizontal" novalidate [formGroup]="irrigationLocationForm" (submit)="onSubmit()">
+      <div class="">
+        <div class="form-group">
+          <div class="col-sm-12 col-md-9 col-lg-8 col-xs-12" *ngIf="irrigationName">
+            <label class="control-label display-inline" for="irrigationName">Irrigation : </label>
+            <span class="m-l-md display-inline"> {{ irrigationName }}</span>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-12 col-md-12">
+            <table>
+              <tr>
+                <td>
+                  <label>Available : </label>
+                </td>
+                <td></td>
+                <td>
+                  <label>Locations : </label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div>
+                    <select class="form-control multiple-selectbox-width" multiple id="selectedAvailableItems" name="selectedAvailableItems"
+                      size="10" formControlName="selectedAvailableItems" [(ngModel)]="selectedAvailableItems">
+                      <option *ngFor="let item of AvailableList | orderBy: 'name'" [value]="item">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div style="float:left;padding: 30px;">
+                    <a href="javascript:void(0);" (click)="setSelectedItems()">
+                      <i class="fa fa-long-arrow-right text-primary font_75"></i>
+                    </a>
+                    <br/>
+                    <a href="javascript:void(0);" (click)="setAvailableItems()">
+                      <i class="fa fa-long-arrow-left text-primary font_75"></i>
+                    </a>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <select class="form-control multiple-selectbox-width" multiple id="selectedLocationItems" name="selectedLocationItems" size="10"
+                      formControlName="selectedLocationItems" [(ngModel)]="selectedLocationItems">
+                      <option *ngFor="let item of SelectedList | orderBy: 'name'" [value]="item">
+                        {{ item.name }}
+                      </option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+
+      <div class="col-md-12 col-sm-12 col-xs-12 padding-zero mb20">
+        <hr>
+        <div class="float-right">
+          <a href="javascript:void(0);" class="mr10" (click)="onSubmit()">
+            <i class="fa fa-check-circle save_icon"></i>
+          </a>
+          <a href="javascript:void(0);" (click)="backToContactProfile()">
+            <i class="fa fa-times-circle cancel_icon"></i>
+          </a>
+        </div>
+
+      </div>
+    </form>
+
+  </div>

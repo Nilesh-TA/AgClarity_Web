@@ -1,0 +1,118 @@
+<div class="wrraper top-wrap clearfix">
+  <!-- Dropdowns -->
+  <app-common-nav-top [masterData]="pageName"></app-common-nav-top>
+  <!-- Dropdowns -->
+
+  <div class="pt10">
+      <form class="form-horizontal" novalidate [formGroup]="addForm" (submit)="onSubmit()">
+          <div class="">
+              <div class="form-group">
+                  <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                      <label class="control-label" for="name">Name: *</label>
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                      <input type="text" class="form-control" id="name" formControlName="name" placeholder="Name" name="name" [ngClass]="{'is-invalid':pestFormErrors.name, '': !pestFormErrors.name}" />
+                      <div [hidden]="!pestFormErrors.name" class="invalid-feedback">
+                          {{ pestFormErrors.name }}
+                      </div>
+                  </div>
+                  <div class="clearfix"></div>
+              </div>
+
+              <div class="form-group">
+                  <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                      <label class="control-label" for="description">Description: </label>
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                      <textarea class="form-control" formControlName="description" id="description" placeholder="Description" name="description"
+                          rows="3"></textarea>
+                  </div>
+                  <div class="clearfix"></div>
+              </div>
+
+              <div class="form-group">
+                  <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                      <label class="control-label" for="type">Type: *</label>
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                      <select class="form-control" id="type" name="type" formControlName="type" [ngClass]="{'is-invalid':pestFormErrors.type, '': !pestFormErrors.type}">
+                          <option value="">-- Select Pest Type --</option>
+                          <option *ngFor="let pestType of pestTypeList" [ngValue]="pestType.value">
+                              {{ pestType.value }}
+                          </option>
+                      </select>
+                      <div [hidden]="!pestFormErrors.type" class="invalid-feedback">
+                          {{ pestFormErrors.type }}
+                      </div>
+                  </div>
+                  <div class="clearfix"></div>
+              </div>
+
+
+              <div class="form-group">
+                  <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                      <label class="control-label" for="severity">Severity: </label>
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                      <input type="text" class="form-control" id="severity" formControlName="severity" placeholder="Severity" name="severity" />
+                  </div>
+                  <div class="clearfix"></div>
+              </div>
+
+              <div class="form-group">
+                  <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                      <label class="control-label" for="spread">Spread: </label>
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                      <input type="text" class="form-control" id="spread" formControlName="spread" placeholder="Spread" name="spread" />
+                  </div>
+                  <div class="clearfix"></div>
+              </div>
+
+              <div class="form-group">
+                  <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                      <label class="control-label" for="symptoms">Symptoms: </label>
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                      <textarea class="form-control" formControlName="symptoms" id="symptoms" placeholder="Symptoms" name="symptoms"
+                      rows="3"></textarea>                        
+                  </div>
+                  <div class="clearfix"></div>
+              </div>
+
+              <div class="form-group">
+                  <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                      <label class="control-label" for="prevention">Prevention: </label>
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                      <input type="text" class="form-control" id="prevention" formControlName="prevention" placeholder="Prevention" name="prevention" />
+                  </div>
+                  <div class="clearfix"></div>
+              </div>
+
+              <div class="form-group">
+                  <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                      <label class="control-label" for="remedy">Remedy: </label>
+                  </div>
+                  <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                      <input type="text" class="form-control" id="remedy" formControlName="remedy" placeholder="Remedy" name="remedy" />
+                  </div>
+                  <div class="clearfix"></div>
+              </div>
+
+          </div>
+
+          <div class="col-md-12 col-sm-12 col-xs-12 padding-zero mb20">
+              <hr>
+              <div class="float-right">
+                  <a href="javascript:void(0);" class="mr10" (click)="onSubmit()">
+                      <i class="fa fa-check-circle save_icon"></i>
+                  </a>
+                  <a href="javascript:void(0);" (click)="backToList()">
+                      <i class="fa fa-times-circle cancel_icon"></i>
+                  </a>
+              </div>
+          </div>
+      </form>
+  </div>
+</div>

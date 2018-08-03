@@ -1,0 +1,292 @@
+<div class="wrraper top-wrap clearfix">
+  <!-- Dropdowns -->
+  <div class="box-location-inp">
+    <span class="inner-txt-location">Master Data</span>
+    <input type="text" class="input-effect" [(ngModel)]="pageName">
+  </div>
+  <!-- Dropdowns -->
+
+  <div class="pt10">
+    <form class="form-horizontal" novalidate [formGroup]="userProfileForm" (submit)="onSubmit()">
+      <div class="">
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="last_name">Last Name: *</label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <input type="text" class="form-control" id="last_name" formControlName="last_name" placeholder="Last Name" name="last_name"
+              [ngClass]="{'is-invalid':profileFormErrors.last_name, '': !profileFormErrors.last_name}" />
+            <div [hidden]="!profileFormErrors.last_name" class="invalid-feedback">
+              {{ profileFormErrors.last_name }}
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="first_name">First Name: *</label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <input type="text" class="form-control" id="first_name" formControlName="first_name" placeholder="First Name" name="first_name"
+              [ngClass]="{'is-invalid':profileFormErrors.first_name, '': !profileFormErrors.first_name}" />
+            <div [hidden]="!profileFormErrors.first_name" class="invalid-feedback">
+              {{ profileFormErrors.first_name }}
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="title">Title:</label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <input type="text" class="form-control" id="title" formControlName="title" placeholder="Title" name="title" />
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="phone">Phone:</label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12 row">
+            <div class="col-md-7">
+              <input type="text" class="form-control display-inline" id="phone" formControlName="phone" name="phone" placeholder="(123) 456-7890"
+                [textMask]="{mask: phone_mask}" />
+            </div>
+            <div class="col-md-4 m-n p-n">
+              <select class="form-control display-inline" id="phone_source" name="phone_source" formControlName="phone_source">
+                <option value="">-- Select Type --</option>
+                <option *ngFor="let contactSource of contactSourceList" [ngValue]="contactSource.value">
+                  {{ contactSource.description }}
+                </option>
+              </select>
+            </div>
+            <div class="col-md-1 m-t-sm p-n">
+              <i class="fa fa-plus add_more_icon" (click)="addPhone();"></i>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <!-- Manage Multiple Phones -->
+        <div formArrayName="phones">
+          <div class="form-group" *ngFor="let item of getControls(userProfileForm,'phones'); let i = index;" [formGroupName]="i">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12 row">
+              <div class="col-md-7">
+                <input type="text" class="form-control display-inline" id="phone" formControlName="phone" name="phone" placeholder="(123) 456-7890"
+                  [textMask]="{mask: phone_mask}" />
+              </div>
+              <div class="col-md-4 m-n p-n">
+                <select class="form-control display-inline" id="phone_source" name="phone_source" formControlName="phone_source">
+                  <option value="">-- Select Type --</option>
+                  <option *ngFor="let contactSource of contactSourceList" [ngValue]="contactSource.value">
+                    {{ contactSource.description }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-1 m-t-sm p-n">
+                <i class="fa fa-times delete_icon" (click)="deletePhoneItem(i, item);"></i>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+        <!-- Manage Multiple Phones -->
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="email">Email: *</label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12 row">
+            <div class="col-md-7">
+              <input type="text" class="form-control display-inline" id="email" formControlName="email" placeholder="Email" name="email"
+                [ngClass]="{'is-invalid':profileFormErrors.email, '': !profileFormErrors.email}" />
+
+              <div [hidden]="!profileFormErrors.email" class="invalid-feedback">
+                {{ profileFormErrors.email }}
+              </div>
+            </div>
+            <div class="col-md-4 m-n p-n">
+              <select class="form-control display-inline" id="email_source" name="email_source" formControlName="email_source" [ngClass]="{'is-invalid':profileFormErrors.email_source, '': !profileFormErrors.email_source}">
+                <option value="">-- Select Type --</option>
+                <option *ngFor="let contactSource of contactSourceList" [ngValue]="contactSource.value">
+                  {{ contactSource.description }}
+                </option>
+              </select>
+              <div [hidden]="!profileFormErrors.email_source" class="invalid-feedback">
+                {{ profileFormErrors.email_source }}
+              </div>
+            </div>
+            <div class="col-md-1 m-t-sm p-n">
+              <i class="fa fa-plus add_more_icon" (click)="addEmail();"></i>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <!-- Manage Multiple Emails -->
+        <div formArrayName="emails">
+          <div class="form-group" *ngFor="let item of getControls(userProfileForm,'emails'); let i = index;" [formGroupName]="i">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12 row">
+              <div class="col-md-7">
+                <input type="text" class="form-control display-inline" id="email" formControlName="email" placeholder="Email" name="email"
+                  [ngClass]="{'is-invalid':(!userProfileForm.controls.emails.controls[i].controls.email.valid  && (userProfileForm.controls.emails.controls[i].controls.email.touched)), '': !(!userProfileForm.controls.emails.controls[i].controls.email.valid  && (userProfileForm.controls.emails.controls[i].controls.email.touched))}"
+                />
+                <div *ngIf="!userProfileForm.controls.emails.controls[i].controls.email.valid  && (userProfileForm.controls.emails.controls[i].controls.email.touched)"
+                  class="text-danger">
+                  <span *ngIf="userProfileForm.controls.emails.controls[i].controls.email.errors.required">
+                    Please enter email.
+                  </span>
+                  <span *ngIf="userProfileForm.controls.emails.controls[i].controls.email.errors.pattern">
+                    Please enter valid email.
+                  </span>
+                </div>
+              </div>
+              <div class="col-md-4 m-n p-n">
+                <select class="form-control display-inline" id="email_source" name="email_source" formControlName="email_source" [ngClass]="{'is-invalid':(!userProfileForm.controls.emails.controls[i].controls.email_source.valid  && (userProfileForm.controls.emails.controls[i].controls.email_source.touched)), '': !(!userProfileForm.controls.emails.controls[i].controls.email_source.valid  && (userProfileForm.controls.emails.controls[i].controls.email_source.touched))}">
+                  <option value="">-- Select Type --</option>
+                  <option *ngFor="let contactSource of contactSourceList" [ngValue]="contactSource.value">
+                    {{ contactSource.description }}
+                  </option>
+                </select>
+                <div *ngIf="!userProfileForm.controls.emails.controls[i].controls.email_source.valid  && (userProfileForm.controls.emails.controls[i].controls.email_source.touched)"
+                  class="text-danger">
+                  Please select type.
+                </div>
+              </div>
+              <div class="col-md-1 m-t-sm p-n">
+                <i class="fa fa-times delete_icon" (click)="deleteEmailItem(i, item);"></i>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+        <!-- Manage Multiple Emails -->
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="preferred_contact_method">Preferred Contact Method: *</label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <select class="form-control" id="preferred_contact_method" name="preferred_contact_method" formControlName="preferred_contact_method"
+              [ngClass]="{'is-invalid':profileFormErrors.preferred_contact_method, '': !profileFormErrors.preferred_contact_method}">
+              <option value="">-- Select Preferred Contact Method --</option>
+              <option *ngFor="let contactMethod of contactMethodList" [ngValue]="contactMethod.value">
+                {{ contactMethod.value }}
+              </option>
+            </select>
+            <div [hidden]="!profileFormErrors.preferred_contact_method" class="invalid-feedback">
+              {{ profileFormErrors.preferred_contact_method }}
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="secondary_contact_method">Secondary Contact Method:</label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <select class="form-control" id="secondary_contact_method" name="secondary_contact_method" formControlName="secondary_contact_method">
+              <option value="">-- Select Secondary Contact Method --</option>
+              <option *ngFor="let contactMethod of contactMethodList" [ngValue]="contactMethod.value">
+                {{ contactMethod.value }}
+              </option>
+            </select>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="address_1">Mailing Address: </label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <textarea class="form-control" formControlName="address_1" id="address_1" placeholder="Mailing Address" name="address_1"
+              rows="3"></textarea>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="address_2">Address 2: </label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <textarea class="form-control" formControlName="address_2" id="address_2" placeholder="Address 2" name="address_2" rows="3"></textarea>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="city">City: </label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <input type="text" class="form-control" id="city" formControlName="city" placeholder="City" name="city" />
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="state">State:</label>
+          </div>
+          <div class="col-sm-12 col-md-9 col-xs-12 padding-zero">
+            <div class="col-md-3 col-sm-12 form-group">
+              <input type="text" class="form-control" formControlName="state" id="state" placeholder="State" name="state">
+            </div>
+
+            <div class="col-md-5 col-sm-12 form-group padding-zero">
+              <div class="col-sm-12 col-md-5 col-xs-12">
+                <label class="control-label" for="postal_code">Postal Code: *</label>
+              </div>
+              <div class="col-sm-12 col-md-7 col-xs-12 padding-left-media padding-right-media">
+                <input type="text" class="form-control" formControlName="postal_code" id="postal_code" placeholder="Postal Code" name="postal_code"
+                  [ngClass]="{'is-invalid':profileFormErrors.postal_code, '': profileFormErrors.postal_code}">
+                <div [hidden]="!profileFormErrors.postal_code" class="invalid-feedback">
+                  {{ profileFormErrors.postal_code }}
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-sm-12 form-group padding-zero">
+              <div class="col-sm-12 col-md-3 col-xs-12">
+                <label class="control-label" for="country">Country:</label>
+              </div>
+              <div class="col-sm-12 col-md-9 col-xs-12 padding-left-media padding-right-media">
+                <select class="form-control" id="country" name="country" formControlName="country">
+                  <option value="">-- Select Country --</option>
+                  <option *ngFor="let country of countryList" [ngValue]="country.value">
+                    {{ country.value }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+
+      <div class="col-md-12 col-sm-12 col-xs-12 padding-zero mb20">
+        <hr>
+        <div class="float-right">
+          <a href="javascript:void(0);" class="mr10" (click)="onSubmit()">
+            <i class="fa fa-check-circle save_icon"></i>
+          </a>
+          <a href="javascript:void(0);" (click)="backToList()">
+            <i class="fa fa-times-circle cancel_icon"></i>
+          </a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

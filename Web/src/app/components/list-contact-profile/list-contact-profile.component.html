@@ -1,0 +1,91 @@
+<div class="wrraper top-wrap clearfix">
+
+  <!-- Dropdowns -->
+  <app-common-nav-top [masterData]="pageName"></app-common-nav-top>
+  <!-- Dropdowns -->
+
+  <div class="box-sensors-indicators tasks">
+    <!-- table alerts -->
+    <div class="table-responsive box-table">
+      <table class="table-recom table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Action</th>
+            <th scope="col" (click)="sort('last_name')">
+              Last Name
+              <i class="fa fa-sm mt-2" *ngIf="sortColumn =='last_name'" [ngClass]="{'fa-chevron-up':!reverse,'fa-chevron-down':reverse}"></i>
+            </th>
+            <th scope="col" (click)="sort('first_name')">
+              First Name
+              <i class="fa fa-sm mt-2" *ngIf="sortColumn =='first_name'" [ngClass]="{'fa-chevron-up':!reverse,'fa-chevron-down':reverse}"></i>
+            </th>
+            <th scope="col" (click)="sort('title')">
+              Title
+              <i class="fa fa-sm mt-2" *ngIf="sortColumn =='title'" [ngClass]="{'fa-chevron-up':!reverse,'fa-chevron-down':reverse}"></i>
+            </th>
+            <th scope="col" (click)="sort('phone')">
+              Phone
+              <i class="fa fa-sm mt-2" *ngIf="sortColumn =='phone'" [ngClass]="{'fa-chevron-up':!reverse,'fa-chevron-down':reverse}"></i>
+            </th>
+            <th scope="col" (click)="sort('email')">
+              Email
+              <i class="fa fa-sm mt-2" *ngIf="sortColumn =='email'" [ngClass]="{'fa-chevron-up':!reverse,'fa-chevron-down':reverse}"></i>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let profile of profiles |  orderBy: sortColumn : reverse | paginate: { id: 'paging', itemsPerPage: pageSize, currentPage: pageNo, totalItems: totalItems }">
+            <th scope="row">
+              <ul>
+                <li class="item-list-ch item-list-add" *ngIf="commonService.hasUpdateAccess(userAccessRole)">
+                  <a (click)="editContactProfile(profile);"></a>
+                </li>
+                <li class="item-list-ch item-list-delete" *ngIf="commonService.hasDeleteAccess(userAccessRole)">
+                  <a (click)="deleteContactProfile(profile);"></a>
+                </li>
+                <li class="item-list-ch item-list-user" *ngIf="commonService.hasReadAccess(userAccessRole)">
+                  <a (click)="viewContactProfile(profile);"></a>
+                </li>
+              </ul>
+            </th>
+            <td>
+              {{ profile.last_name }}
+            </td>
+            <td>
+              {{ profile.first_name }}
+            </td>
+            <td>
+              {{ profile.title }}
+            </td>
+            <td>
+              {{ profile.phone }}
+            </td>
+            <td>
+              {{ profile.email }}
+            </td>
+          </tr>
+          <tr *ngIf="profiles.length == 0">
+            <th></th>
+            <td colspan="5" class="text-center">No records found.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="col-sm-12 row pr0">
+        <div class="col-md-8 form-group">
+          <pagination-controls id="paging" (pageChange)="getPage($event)" *ngIf="profiles.length > 0"></pagination-controls>
+        </div>
+        <div class="col-md-4 form-group text-right pr0">
+          <!-- //table alerts -->
+          <div class="add-task-box" *ngIf="commonService.hasCreateAccess(userAccessRole)">
+            <a href="javascript:void(0);" (click)="addContactProfile();" class="cl-green">
+              <span>
+                <i class="fa fa-plus add_icon" title="Add New Profile "></i>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

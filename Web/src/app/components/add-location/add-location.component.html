@@ -1,0 +1,245 @@
+<div class="wrraper top-wrap clearfix">
+  <!-- Dropdowns -->
+  <app-common-nav-top [masterData]="pageName"></app-common-nav-top>
+  <!-- Dropdowns -->
+
+  <div class="pt10">
+    <form class="form-horizontal" novalidate [formGroup]="addForm" (submit)="onSubmit()">
+      <div class="">
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="name">Name: *</label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <input type="text" class="form-control" id="name" formControlName="name" placeholder="Name" name="name" [ngClass]="{'is-invalid':locationFormErrors.name, '': !locationFormErrors.name}"
+            />
+            <div [hidden]="!locationFormErrors.name" class="invalid-feedback">
+              {{ locationFormErrors.name }}
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="type">Type: *</label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <select class="form-control" id="type" name="type" formControlName="type" [ngClass]="{'is-invalid':locationFormErrors.type, '': !locationFormErrors.type}">
+              <option value="">-- Select Location Type --</option>
+              <option *ngFor="let locationType of locationTypeList" [ngValue]="locationType.value">
+                {{ locationType.value }}
+              </option>
+            </select>
+            <div [hidden]="!locationFormErrors.type" class="invalid-feedback">
+              {{ locationFormErrors.type }}
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="description">Description: *</label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <textarea class="form-control" formControlName="description" id="description" placeholder="Description" name="description"
+              rows="3" [ngClass]="{'is-invalid':locationFormErrors.description, '': !locationFormErrors.description}"></textarea>
+            <div [hidden]="!locationFormErrors.description" class="invalid-feedback">
+              {{ locationFormErrors.description }}
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="address">Address: </label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <textarea class="form-control" formControlName="address" id="address" placeholder="Address" name="address" rows="3"></textarea>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="longitude">Longitude:</label>
+          </div>
+          <div class="col-sm-12 col-md-9 col-xs-12 padding-zero">
+            <div class="col-md-3 col-sm-12 form-group">
+              <input type="text" class="form-control" formControlName="longitude" id="longitude" placeholder="Longitude" name="longitude"
+                [ngClass]="{'is-invalid':locationFormErrors.longitude, '': !locationFormErrors.longitude}" />
+              <div [hidden]="!locationFormErrors.longitude" class="invalid-feedback">
+                {{ locationFormErrors.longitude }}
+              </div>
+            </div>
+
+            <div class="col-md-5 col-sm-12 form-group padding-zero">
+              <div class="col-sm-12 col-md-5 col-xs-12">
+                <label class="control-label" for="latitude">Latitude:</label>
+              </div>
+              <div class="col-sm-12 col-md-7 col-xs-12 padding-left-media padding-right-media">
+                <input type="text" class="form-control" formControlName="latitude" id="latitude" placeholder="Latitude" name="latitude" [ngClass]="{'is-invalid':locationFormErrors.latitude, '': !locationFormErrors.latitude}"
+                />
+                <div [hidden]="!locationFormErrors.latitude" class="invalid-feedback">
+                  {{ locationFormErrors.latitude }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="polygon_data">Polygon Data: </label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <input type="text" class="form-control" id="polygon_data" formControlName="polygon_data" placeholder="Polygon Data" name="polygon_data"
+            />
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="size">Size: </label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <input type="text" class="form-control" id="size" formControlName="size" placeholder="Size" name="size" [ngClass]="{'is-invalid':locationFormErrors.size, '': !locationFormErrors.size}"
+            />
+            <div [hidden]="!locationFormErrors.size" class="invalid-feedback">
+              {{ locationFormErrors.size }}
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="slope">Slope:</label>
+          </div>
+          <div class="col-sm-12 col-md-9 col-xs-12 padding-zero">
+            <div class="col-md-3 col-sm-12 form-group">
+              <input type="text" class="form-control" formControlName="slope" id="slope" placeholder="Slope" name="slope" />
+            </div>
+
+            <div class="col-md-5 col-sm-12 form-group padding-zero">
+              <div class="col-sm-12 col-md-5 col-xs-12">
+                <label class="control-label" for="aspect">Aspect:</label>
+              </div>
+              <div class="col-sm-12 col-md-7 col-xs-12 padding-left-media padding-right-media">
+                <input type="text" class="form-control" formControlName="aspect" id="aspect" placeholder="Aspect" name="aspect" />
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="elevation">Elevation: </label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <input type="text" class="form-control" id="elevation" formControlName="elevation" placeholder="Elevation" name="elevation"
+              [ngClass]="{'is-invalid':locationFormErrors.elevation, '': !locationFormErrors.elevation}" />
+            <div [hidden]="!locationFormErrors.elevation" class="invalid-feedback">
+              {{ locationFormErrors.elevation }}
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="soil_texture">Soil Texture Index:</label>
+          </div>
+          <div class="col-sm-12 col-md-9 col-xs-12 padding-zero">
+            <div class="col-md-3 col-sm-12 form-group">
+              <input type="text" class="form-control" formControlName="soil_texture" id="soil_texture" placeholder="Soil Texture Index"
+                name="soil_texture" [ngClass]="{'is-invalid':locationFormErrors.soil_texture, '': !locationFormErrors.soil_texture}"
+              />
+              <div [hidden]="!locationFormErrors.soil_texture" class="invalid-feedback">
+                {{ locationFormErrors.soil_texture }}
+              </div>
+            </div>
+
+            <div class="col-md-5 col-sm-12 form-group padding-zero">
+              <div class="col-sm-12 col-md-5 col-xs-12">
+                <label class="control-label" for="soil_depth">Soil Depth:</label>
+              </div>
+              <div class="col-sm-12 col-md-7 col-xs-12 padding-left-media padding-right-media">
+                <input type="text" class="form-control" formControlName="soil_depth" id="soil_depth" placeholder="Soil Depth" name="soil_depth"
+                  [ngClass]="{'is-invalid':locationFormErrors.soil_depth, '': !locationFormErrors.soil_depth}" />
+                <div [hidden]="!locationFormErrors.soil_depth" class="invalid-feedback">
+                  {{ locationFormErrors.soil_depth }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="field_capacity">Field Capacity:</label>
+          </div>
+          <div class="col-sm-12 col-md-9 col-xs-12 padding-zero">
+            <div class="col-md-3 col-sm-12 form-group">
+              <input type="text" class="form-control" formControlName="field_capacity" id="field_capacity" placeholder="Field Capacity"
+                name="field_capacity" [ngClass]="{'is-invalid':locationFormErrors.field_capacity, '': !locationFormErrors.field_capacity}"
+              />
+              <div [hidden]="!locationFormErrors.field_capacity" class="invalid-feedback">
+                {{ locationFormErrors.field_capacity }}
+              </div>
+            </div>
+
+            <div class="col-md-5 col-sm-12 form-group padding-zero">
+              <div class="col-sm-12 col-md-5 col-xs-12">
+                <label class="control-label" for="water_depth">Water Depth:</label>
+              </div>
+              <div class="col-sm-12 col-md-7 col-xs-12 padding-left-media padding-right-media">
+                <input type="text" class="form-control" formControlName="water_depth" id="water_depth" placeholder="Water Depth" name="water_depth"
+                  [ngClass]="{'is-invalid':locationFormErrors.water_depth, '': !locationFormErrors.water_depth}" />
+                <div [hidden]="!locationFormErrors.water_depth" class="invalid-feedback">
+                  {{ locationFormErrors.water_depth }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="mdp">MDP: </label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <input type="text" class="form-control" id="mdp" formControlName="mdp" placeholder="MDP" name="mdp" [ngClass]="{'is-invalid':locationFormErrors.mdp, '': !locationFormErrors.mdp}" />
+            <div [hidden]="!locationFormErrors.mdp" class="invalid-feedback">
+              {{ locationFormErrors.mdp }}
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+      </div>
+
+      <div class="col-md-12 col-sm-12 col-xs-12 padding-zero mb20">
+        <hr>
+        <div class="float-right">
+          <a href="javascript:void(0);" class="mr10">
+            <i class="fa fa-map-marker map_icon"></i>
+          </a>
+          <a href="javascript:void(0);" class="mr10" (click)="onSubmit()">
+            <i class="fa fa-check-circle save_icon"></i>
+          </a>
+          <a href="javascript:void(0);" (click)="backToList()">
+            <i class="fa fa-times-circle cancel_icon"></i>
+          </a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

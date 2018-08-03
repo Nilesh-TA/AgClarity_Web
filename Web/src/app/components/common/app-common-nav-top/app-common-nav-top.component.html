@@ -1,0 +1,12 @@
+<div class="box-location-inp">
+  <span class="inner-txt-location">Company</span>
+  <input type="text" class="input-effect" [(ngModel)]="companyName">
+</div>
+<div class="box-location-inp show">
+  <span class="inner-txt-location">Master Data</span>
+  <select class="select-effect" [(ngModel)]="masterData" (change)="commonService.redirectByMasterData($event,true)">
+    <option *ngFor="let masterdata of masterDataList" [value]="masterdata.value">
+      {{ masterdata.value }}
+    </option>
+  </select>
+</div>

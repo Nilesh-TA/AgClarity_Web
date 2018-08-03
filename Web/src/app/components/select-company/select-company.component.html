@@ -1,0 +1,21 @@
+<div class="wrraper top-wrap clearfix">
+  <div class="box-location-inp">
+    <span class="inner-txt-location">Company</span>
+    <select class="select-effect" [(ngModel)]="companyId" (change)="setCompany($event)" 
+      *ngIf="companyList.length > 1">
+      <option value="0">-- Select Company --</option>
+      <option *ngFor="let company of companyList" [value]="company.ID_company">
+        {{ company.name }}
+      </option>
+    </select>
+  </div>
+  <div class="box-location-inp show" *ngIf="showMasterDataDropdown">
+    <span class="inner-txt-location">Master Data</span>
+    <select class="select-effect" [(ngModel)]="masterData" (change) = "commonService.redirectByMasterData($event,false)">
+      <option value="">-- Select Master Data --</option>
+      <option *ngFor="let masterdata of masterDataList" [value]="masterdata.value">
+        {{ masterdata.value }}
+      </option>
+    </select>
+  </div>
+</div>

@@ -1,0 +1,276 @@
+<div class="wrraper top-wrap clearfix">
+    <!-- Dropdowns -->
+    <app-common-nav-top [masterData]="pageName"></app-common-nav-top>
+    <!-- Dropdowns -->
+  
+    <div class="pt10">
+      <form class="form-horizontal" novalidate [formGroup]="editForm" (submit)="onSubmit()">
+        <div class="">
+          <div class="form-group">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+              <label class="control-label" for="name">Name: *</label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+              <input type="text" class="form-control" id="name" formControlName="name" placeholder="Name" name="name" [ngClass]="{'is-invalid':cropFormErrors.name, '': !cropFormErrors.name}" />
+              <div [hidden]="!cropFormErrors.name" class="invalid-feedback">
+                {{ cropFormErrors.name }}
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+  
+          <div class="form-group">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+              <label class="control-label">Variety:</label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+              <input type="text" class="form-control" id="variety_name" formControlName="variety_name" placeholder="Variety" name="variety_name" />
+            </div>
+            <div class="clearfix"></div>
+          </div>
+  
+          <div class="form-group">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+              <label class="control-label" for="description">Description: </label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+              <textarea class="form-control" formControlName="description" id="description" placeholder="Description" name="description"
+                rows="3"></textarea>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+  
+          <div class="form-group">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+              <label class="control-label" for="type">Type: *</label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+              <select class="form-control" id="type" name="type" formControlName="type" [ngClass]="{'is-invalid':cropFormErrors.type, '': !cropFormErrors.type}">
+                <option value="">-- Select Crop Type --</option>
+                <option *ngFor="let cropType of cropTypeList" [ngValue]="cropType.value">
+                  {{ cropType.value }}
+                </option>
+              </select>
+              <div [hidden]="!cropFormErrors.type" class="invalid-feedback">
+                {{ cropFormErrors.type }}
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+  
+  
+          <div class="form-group">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+              <label class="control-label" for="avg_yield_acre">Average Yield/Acre: *</label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+              <input type="text" class="form-control" id="avg_yield_acre" formControlName="avg_yield_acre" placeholder="Average Yield/Acre"
+                name="avg_yield_acre" [ngClass]="{'is-invalid':cropFormErrors.avg_yield_acre, '': !cropFormErrors.avg_yield_acre}" />
+              <div [hidden]="!cropFormErrors.avg_yield_acre" class="invalid-feedback">
+                {{ cropFormErrors.avg_yield_acre }}
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+  
+          <div class="form-group">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+              <label class="control-label" for="avg_size">Average Size: </label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+              <input type="text" class="form-control" id="avg_size" formControlName="avg_size" placeholder="Average Size" name="avg_size"
+                [ngClass]="{'is-invalid':cropFormErrors.avg_size, '': !cropFormErrors.avg_size}" />
+              <div [hidden]="!cropFormErrors.avg_size" class="invalid-feedback">
+                {{ cropFormErrors.avg_size }}
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+  
+          <div class="form-group">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+              <label class="control-label" for="avg_color">Average Color: </label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+              <input type="text" class="form-control" id="avg_color" formControlName="avg_color" placeholder="Average Color" name="avg_color" />
+            </div>
+            <div class="clearfix"></div>
+          </div>
+  
+          <div class="form-group">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+              <label class="control-label" for="maturity_cycle">Maturity Cycle: </label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+              <input type="text" class="form-control" id="maturity_cycle" formControlName="maturity_cycle" placeholder="Maturity Cycle"
+                name="maturity_cycle" />
+            </div>
+            <div class="clearfix"></div>
+          </div>
+  
+          <div class="form-group">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+              <label class="control-label" for="crop_cycle">Crop Cycle: </label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+              <input type="text" class="form-control" id="crop_cycle" formControlName="crop_cycle" placeholder="Crop Cycle" name="crop_cycle" />
+            </div>
+            <div class="clearfix"></div>
+          </div>
+  
+          <div class="form-group">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+              <label class="control-label" for="crop_season">Crop Season: </label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+              <input type="text" class="form-control" id="crop_season" formControlName="crop_season" placeholder="Crop Season" name="crop_season" />
+            </div>
+            <div class="clearfix"></div>
+          </div>
+  
+  
+          <div class="">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+              <label class="control-label">KC:</label>
+            </div>
+            <div class="col-sm-12 col-md-9 col-xs-12 padding-zero">
+              <div class="col-md-2 col-sm-12 form-group">
+                <input type="text" class="form-control" id="kc_init" formControlName="kc_init" placeholder="KC Init" name="kc_init" [ngClass]="{'is-invalid':cropFormErrors.kc_init, '': !cropFormErrors.kc_init}" />
+                <div [hidden]="!cropFormErrors.kc_init" class="invalid-feedback">
+                  {{ cropFormErrors.kc_init }}
+                </div>
+              </div>
+  
+              <div class="col-md-2 col-sm-12 form-group">
+                <input type="text" class="form-control" id="kc_mid" formControlName="kc_mid" placeholder="KC Mid" name="kc_mid" [ngClass]="{'is-invalid':cropFormErrors.kc_mid, '': !cropFormErrors.kc_mid}" />
+                <div [hidden]="!cropFormErrors.kc_mid" class="invalid-feedback">
+                  {{ cropFormErrors.kc_mid }}
+                </div>
+              </div>
+  
+              <div class="col-md-2 col-sm-12 form-group">
+                <input type="text" class="form-control" id="kc_end" formControlName="kc_end" placeholder="KC End" name="kc_end" [ngClass]="{'is-invalid':cropFormErrors.kc_end, '': !cropFormErrors.kc_end}" />
+                <div [hidden]="!cropFormErrors.kc_end" class="invalid-feedback">
+                  {{ cropFormErrors.kc_end }}
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+  
+          <div class="form-group">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+              <label class="control-label" for="stage_1">Stage 1: </label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+              <input type="text" class="form-control" id="stage_1" formControlName="stage_1" placeholder="Stage 1" name="stage_1" />
+            </div>
+            <div class="clearfix"></div>
+          </div>
+  
+          <div class="form-group">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+              <label class="control-label" for="stage_2">Stage 2: </label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+              <input type="text" class="form-control" id="stage_2" formControlName="stage_2" placeholder="Stage 2" name="stage_2" />
+            </div>
+            <div class="clearfix"></div>
+          </div>
+  
+          <div class="form-group">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+              <label class="control-label" for="stage_3">Stage 3: </label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+              <input type="text" class="form-control" id="stage_3" formControlName="stage_3" placeholder="Stage 3" name="stage_3" />
+            </div>
+            <div class="clearfix"></div>
+          </div>
+  
+          <div class="form-group">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+              <label class="control-label" for="stage_4">Stage 4: </label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+              <input type="text" class="form-control" id="stage_4" formControlName="stage_4" placeholder="Stage 4" name="stage_4" />
+            </div>
+            <div class="clearfix"></div>
+          </div>
+  
+          <div class="form-group">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+              <label class="control-label" for="stage_5">Stage 5: </label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+              <input type="text" class="form-control" id="stage_5" formControlName="stage_5" placeholder="Stage 5" name="stage_5" />
+            </div>
+            <div class="clearfix"></div>
+          </div>
+  
+          <div class="form-group">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+              <label class="control-label" for="stage_6">Stage 6: </label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+              <input type="text" class="form-control" id="stage_6" formControlName="stage_6" placeholder="Stage 6" name="stage_6" />
+            </div>
+            <div class="clearfix"></div>
+          </div>
+  
+          <div class="form-group">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+              <label class="control-label" for="stage_7">Stage 7: </label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+              <input type="text" class="form-control" id="stage_7" formControlName="stage_7" placeholder="Stage 7" name="stage_7" />
+            </div>
+            <div class="clearfix"></div>
+          </div>
+  
+          <div class="form-group">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+              <label class="control-label" for="stage_8">Stage 8: </label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+              <input type="text" class="form-control" id="stage_8" formControlName="stage_8" placeholder="Stage 8" name="stage_8" />
+            </div>
+            <div class="clearfix"></div>
+          </div>
+  
+          <div class="form-group">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+              <label class="control-label" for="stage_9">Stage 9: </label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+              <input type="text" class="form-control" id="stage_9" formControlName="stage_9" placeholder="Stage 9" name="stage_9" />
+            </div>
+            <div class="clearfix"></div>
+          </div>
+  
+          <div class="form-group">
+            <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+              <label class="control-label" for="stage_10">Stage 10: </label>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+              <input type="text" class="form-control" id="stage_10" formControlName="stage_10" placeholder="Stage 10" name="stage_10" />
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          
+        </div>
+  
+        <div class="col-md-12 col-sm-12 col-xs-12 padding-zero mb20">
+          <hr>
+          <div class="float-right">
+            <a href="javascript:void(0);" class="mr10" (click)="onSubmit()">
+              <i class="fa fa-check-circle save_icon"></i>
+            </a>
+            <a href="javascript:void(0);" (click)="backToList()">
+              <i class="fa fa-times-circle cancel_icon"></i>
+            </a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>

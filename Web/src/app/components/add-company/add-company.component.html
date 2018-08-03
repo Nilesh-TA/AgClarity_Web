@@ -1,0 +1,200 @@
+<div class="wrraper top-wrap clearfix">
+    <!-- Dropdowns -->
+    <app-common-nav-top [masterData]="pageName"></app-common-nav-top>
+    <!-- Dropdowns -->
+
+    <div class="pt10">
+        <form class="form-horizontal" novalidate [formGroup]="addForm" (submit)="onSubmit()">
+            <div class="">
+                <div class="form-group">
+                    <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                        <label class="control-label" for="name">Name: *</label>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                        <input type="text" class="form-control" id="name" formControlName="name" placeholder="Company Name" name="name" [ngClass]="{'is-invalid':companyFormErrors.name, '': !companyFormErrors.name}">
+                        <div [hidden]="!companyFormErrors.name" class="invalid-feedback">
+                            {{ companyFormErrors.name }}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                        <label class="control-label" for="metric_imperial">Metric or Imperial: *</label>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                        <select class="form-control" id="metric_imperial" name="metric_imperial" formControlName="metric_imperial" [ngClass]="{'is-invalid':companyFormErrors.metric_imperial, '': !companyFormErrors.metric_imperial}">
+                            <option value="">-- Select UOM --</option>
+                            <option *ngFor="let uom of uomList" [ngValue]="uom.value">
+                                {{ uom.description }}
+                            </option>
+                        </select>
+                        <div [hidden]="!companyFormErrors.metric_imperial" class="invalid-feedback">
+                            {{ companyFormErrors.metric_imperial }}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                        <label class="control-label" for="currency">Currency: *</label>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                        <select class="form-control" id="currency" name="currency" formControlName="currency" [ngClass]="{'is-invalid':companyFormErrors.currency, '': !companyFormErrors.currency}">
+                            <option value="">-- Select Currency --</option>
+                            <option *ngFor="let currency of currencyList" [ngValue]="currency.value">
+                                {{ currency.value }}
+                            </option>
+                        </select>
+                        <div [hidden]="!companyFormErrors.currency" class="invalid-feedback">
+                            {{ companyFormErrors.currency }}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                        <label class="control-label" for="dunsnumber">DUNS Number:</label>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                        <input type="text" class="form-control" formControlName="dunsnumber" id="dunsnumber" placeholder="DUNS Number" name="dunsnumber">
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                        <label class="control-label" for="related_to">Related To:</label>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                        <select class="form-control" id="related_to" name="related_to" formControlName="related_to">
+                            <option value="0">-- Select Related Company --</option>
+                            <option *ngFor="let company of companyList" [ngValue]="company.ID_company">
+                                {{ company.name }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                        <label class="control-label" for="rank">Rank:</label>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                        <input type="text" class="form-control" formControlName="rank" id="rank" placeholder="Rank" name="rank" [ngClass]="{'is-invalid':companyFormErrors.rank, '': !companyFormErrors.rank}">
+                        <div [hidden]="!companyFormErrors.rank" class="invalid-feedback">
+                            {{ companyFormErrors.rank }}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                        <label class="control-label" for="address_1">Mailing Address: *</label>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                        <textarea class="form-control" formControlName="address_1" id="address_1" placeholder="Mailing Address" name="address_1"
+                            [ngClass]="{'is-invalid':companyFormErrors.address_1, '': !companyFormErrors.address_1}" rows="3"></textarea>
+                        <div [hidden]="!companyFormErrors.address_1" class="invalid-feedback">
+                            {{ companyFormErrors.address_1 }}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                        <label class="control-label" for="address_2">Address 2:</label>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                        <textarea class="form-control" formControlName="address_2" id="address_2" placeholder="Optional Address" name="address_2"
+                            rows="3"></textarea>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                        <label class="control-label" for="city">City: *</label>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                        <input type="text" class="form-control" formControlName="city" id="city" placeholder="City" name="city" [ngClass]="{'is-invalid':companyFormErrors.city, '': !companyFormErrors.city}">
+                        <div [hidden]="!companyFormErrors.city" class="invalid-feedback">
+                            {{ companyFormErrors.city }}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="">
+                    <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                        <label class="control-label" for="state">State:</label>
+                    </div>
+                    <div class="col-sm-12 col-md-9 col-xs-12 padding-zero">
+                        <div class="col-md-3 col-sm-12 form-group">
+                            <input type="text" class="form-control" formControlName="state" id="state" placeholder="State" name="state">
+                        </div>
+
+                        <div class="col-md-5 col-sm-12 form-group padding-zero">
+                            <div class="col-sm-12 col-md-5 col-xs-12">
+                                <label class="control-label" for="postal_code">Postal Code: *</label>
+                            </div>
+                            <div class="col-sm-12 col-md-7 col-xs-12 padding-left-media padding-right-media">
+                                <input type="text" class="form-control" formControlName="postal_code" id="postal_code" placeholder="Postal Code" name="postal_code"
+                                    [ngClass]="{'is-invalid':companyFormErrors.postal_code, '': companyFormErrors.postal_code}">
+                                <div [hidden]="!companyFormErrors.postal_code" class="invalid-feedback">
+                                    {{ companyFormErrors.postal_code }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-sm-12 form-group padding-zero">
+                            <div class="col-sm-12 col-md-3 col-xs-12">
+                                <label class="control-label" for="country">Country:</label>
+                            </div>
+                            <div class="col-sm-12 col-md-9 col-xs-12 padding-left-media padding-right-media">
+                                <select class="form-control" id="country" name="country" formControlName="country">
+                                    <option value="">-- Select Country --</option>
+                                    <option *ngFor="let country of countryList" [ngValue]="country.value">
+                                        {{ country.value }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+                        <label class="control-label" for="water_saved">Water Saved:</label>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+                        <input type="text" class="form-control" formControlName="water_saved" id="water_saved" placeholder="Water Saved Number" name="water_saved">
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12 col-xs-12 padding-zero mb20">
+                <hr>
+                <div class="float-right">
+                    <a href="javascript:void(0);" class="mr10" (click)="onSubmit()">
+                        <i class="fa fa-check-circle save_icon"></i>
+                    </a>
+                    <a href="javascript:void(0);" (click)="backToList()">
+                        <i class="fa fa-times-circle cancel_icon"></i>
+                    </a>
+                    <!-- <button class="btn btn-success mr10" type="submit" [disabled]="!addForm.valid">Save</button>
+                <button class="btn btn-danger" type="button" (click)="backToList()">Cancel</button> -->
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

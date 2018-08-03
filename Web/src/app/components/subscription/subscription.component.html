@@ -1,0 +1,122 @@
+<div class="wrraper top-wrap clearfix">
+
+  <!-- Dropdowns -->
+  <app-common-nav-top [masterData]="pageName"></app-common-nav-top>
+  <!-- Dropdowns -->
+  <div class="pt10">
+    <form class="form-horizontal" novalidate [formGroup]="subscriptionForm" (submit)="onSubmit()">
+      <div class="">
+        <div class="form-group">
+          <div class="col-sm-12 col-md-12">
+            <table>
+              <tr>
+                <td>
+                  <label>Available : </label>
+                </td>
+                <td></td>
+                <td>
+                  <label>Subscription : </label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div>
+                    <select class="form-control" multiple id="selectedAvailableItems" name="selectedAvailableItems" size="10" style="width:225px"
+                      formControlName="selectedAvailableItems" [(ngModel)]="selectedAvailableItems">
+                      <option *ngFor="let microApp of AvailableMicroAppList | orderBy: 'value'" [value]="microApp">
+                        {{ microApp }}
+                      </option>
+                    </select>
+                  </div>
+                </td>
+                <td>
+                  <div style="float:left;padding: 30px;">
+                    <a href="javascript:void(0);" (click)="setSubscriptionItems()">
+                      <i class="fa fa-long-arrow-right text-primary font_75"></i>
+                    </a>
+                    <br/>
+                    <a href="javascript:void(0);" (click)="setAvailableItems()">
+                      <i class="fa fa-long-arrow-left text-primary font_75"></i>
+                    </a>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <select class="form-control" multiple id="selectedSubscriptionItems" name="selectedSubscriptionItems" size="10" style="width:225px"
+                      formControlName="selectedSubscriptionItems" [(ngModel)]="selectedSubscriptionItems">
+                      <option *ngFor="let microApp of SelectedMicroAppList | orderBy: 'value'" [value]="microApp">
+                        {{ microApp }}
+                      </option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        <div class="form-group m-t-lg">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="app_level">App Level: </label>
+          </div>
+          <div class="col-sm-12 col-md-5 col-lg-5 col-xs-12">
+            <input type="text" class="form-control" id="app_level" formControlName="app_level" placeholder="App Level" name="app_level">
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="app_version">App Version: *</label>
+          </div>
+          <div class="col-sm-12 col-md-5 col-lg-5 col-xs-12">
+            <input type="text" class="form-control" id="app_version" formControlName="app_version" placeholder="App Version" name="app_version"
+              [ngClass]="{'is-invalid':subscriptionFormErrors.app_version, '': !subscriptionFormErrors.app_version}">
+            <div [hidden]="!subscriptionFormErrors.app_version" class="invalid-feedback">
+              {{ subscriptionFormErrors.app_version }}
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="app_version">Start Date: *</label>
+          </div>
+          <div class="col-sm-12 col-md-5 col-lg-5 col-xs-12">
+            <my-date-picker formControlName="start_date" id="start_date" name="start_date" [placeholder]="date_placeholder" [options]="myDatePickerOptions"
+              [ngClass]="{'is-invalid':subscriptionFormErrors.start_date, '': !subscriptionFormErrors.start_date}">
+            </my-date-picker>
+            <div [hidden]="!subscriptionFormErrors.start_date" class="invalid-feedback">
+              {{ subscriptionFormErrors.start_date }}
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="app_version">End Date: *</label>
+          </div>
+          <div class="col-sm-12 col-md-5 col-lg-5 col-xs-12">
+            <my-date-picker formControlName="expire_date" id="expire_date" name="expire_date" [placeholder]="date_placeholder" [options]="myDatePickerOptions"
+              [ngClass]="{'is-invalid':subscriptionFormErrors.expire_date, '': !subscriptionFormErrors.expire_date}">
+            </my-date-picker>
+            <div [hidden]="!subscriptionFormErrors.expire_date" class="invalid-feedback">
+              {{ subscriptionFormErrors.expire_date }}
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <div class="col-md-12 col-sm-12 col-xs-12 padding-zero mb20">
+        <hr>
+        <div class="float-right">
+          <a href="javascript:void(0);" class="mr10" (click)="onSubmit()">
+            <i class="fa fa-check-circle save_icon"></i>
+          </a>        
+        </div>
+      </div>
+    </form>
+
+  </div>
