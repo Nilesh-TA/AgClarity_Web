@@ -1,0 +1,221 @@
+Name : Nilesh
+Date : 06-JUL-2018
+
+/********* Create ContactAccess table ****/
+
+CREATE TABLE `ContactAccess` (					
+	`id_contact_access` bigint NOT NULL AUTO_INCREMENT,				
+	`contactprofileid` bigint NULL,				
+	`company` bigint NULL,	
+	`micro_apps` varchar(500) NULL,	
+	PRIMARY KEY (`id_contact_access`)				
+);					
+
+
+/********* Add data into `ContactAccess` table **********/
+
+INSERT INTO `ContactAccess` (`id_contact_access`,`contactprofileid`,`company`,`micro_apps`)
+VALUES
+(1, 1, 1, 'AgClarity Platform'),
+(2, 1, 1, 'Crop Health'),
+(3, 1, 1, 'Water Management'),
+(4, 1, 1, 'Y3'),
+(5, 1, 1, 'Reporting & Analytics'),
+(6, 2, 1, 'AgClarity Platform')
+
+/*************************************************************************************************************************************/
+
+Name : Nilesh
+Date : 09-JUL-2018
+
+
+/********* Add missing columns into Chemical Table ******/
+
+ALTER TABLE chemical ADD severity varchar(500) NULL;
+
+ALTER TABLE chemical ADD symptoms varchar(2000) NULL;
+
+ALTER TABLE chemical ADD prevention varchar(500) NULL;
+
+ALTER TABLE chemical ADD remedy varchar(500) NULL;
+
+ALTER TABLE chemical ADD company bigint(20) NULL;
+
+
+/********* Add Auto Increment to chemical table ******/
+
+ALTER TABLE `agclarity`.`chemical` 
+CHANGE COLUMN `ID_chemical` `ID_chemical` BIGINT(20) NOT NULL AUTO_INCREMENT ;
+
+
+/*************** Add IsDeleted & DeletedOn field in company and chemical table. ***********/
+
+ALTER TABLE chemical ADD isdeleted bit NULL;
+
+ALTER TABLE company ADD isdeleted bit NULL;
+
+ALTER TABLE chemical ADD deletedon datetime NULL;
+
+ALTER TABLE company ADD deletedon datetime NULL;
+
+
+/******** Add index to isdeleted  columns ****/
+
+CREATE INDEX idx_company_isdeleted ON company (isdeleted);
+
+CREATE INDEX idx_chemical_isdeleted ON chemical (isdeleted);
+
+
+/****************************************************************************************************************
+Name : Nilesh
+Date : 11-JUL-2018
+****************************************************************************************************************/
+
+/*********** Add data into ContactAccess table for contactprofileid = 5 ***/
+
+INSERT INTO `ContactAccess` (`contactprofileid`,`company`,`micro_apps`)
+VALUES
+(5, 1, 'AgClarity Platform'),
+(5, 2, 'AgClarity Platform'),
+(5, 3, 'AgClarity Platform'),
+(5, 4, 'AgClarity Platform'),
+(5, 5, 'AgClarity Platform')
+
+/****************************************************************************************************************
+Name : Nilesh
+Date : 13-JUL-2018
+****************************************************************************************************************/
+
+
+/*************** Add IsDeleted & DeletedOn field in crop table. ***********/
+
+ALTER TABLE crop ADD isdeleted bit NULL;
+
+ALTER TABLE crop ADD deletedon datetime NULL;
+
+/******** Add index to isdeleted columns ****/
+
+CREATE INDEX idx_crop_isdeleted ON crop (isdeleted);
+
+
+/********* Add company column into crop Table ******/
+
+ALTER TABLE crop ADD company bigint(20) NULL;
+
+/*************** Add IsDeleted & DeletedOn field in disease table. ***********/
+
+ALTER TABLE disease ADD isdeleted bit NULL;
+
+ALTER TABLE disease ADD deletedon datetime NULL;
+
+/******** Add index to isdeleted columns ****/
+
+CREATE INDEX idx_disease_isdeleted ON disease (isdeleted);
+
+
+/********* Add company column into disease Table ******/
+
+ALTER TABLE disease ADD company bigint(20) NULL;
+
+
+/****************************************************************************************************************
+Name : Nilesh
+Date : 17-JUL-2018
+****************************************************************************************************************/
+
+/*************** Add IsDeleted & DeletedOn field in pest table. ***********/
+
+ALTER TABLE pest ADD isdeleted bit NULL;
+
+ALTER TABLE pest ADD deletedon datetime NULL;
+
+/******** Add index to isdeleted columns ****/
+
+CREATE INDEX idx_pest_isdeleted ON pest (isdeleted);
+
+
+/********* Add company column into pest Table ******/
+
+ALTER TABLE pest ADD company bigint(20) NULL;
+
+
+/*************** Add IsDeleted & DeletedOn field in sensor table. ***********/
+
+ALTER TABLE sensor ADD isdeleted bit NULL;
+
+ALTER TABLE sensor ADD deletedon datetime NULL;
+
+/******** Add index to isdeleted columns ****/
+
+CREATE INDEX idx_sensor_isdeleted ON sensor (isdeleted);
+
+
+/********* Add company column into sensor Table ******/
+
+ALTER TABLE sensor ADD company bigint(20) NULL;
+
+
+/****************************************************************************************************************
+Name : Nilesh
+Date : 20-JUL-2018
+****************************************************************************************************************/
+
+/*************** Add IsDeleted & DeletedOn field in subscription table. ***********/
+
+ALTER TABLE subscription ADD isdeleted bit NULL;
+
+ALTER TABLE subscription ADD deletedon datetime NULL;
+
+/******** Add index to isdeleted columns ****/
+
+CREATE INDEX idx_subscription_isdeleted ON subscription (isdeleted);
+
+
+/****************************************************************************************************************
+Name : Nilesh
+Date : 23-JUL-2018
+****************************************************************************************************************/
+
+/*************** Add IsDeleted & DeletedOn field in contactprofile table. ***********/
+
+ALTER TABLE contactprofile ADD isdeleted bit NULL;
+
+ALTER TABLE contactprofile ADD deletedon datetime NULL;
+
+/******** Add index to isdeleted columns ****/
+
+CREATE INDEX idx_contactprofile_isdeleted ON contactprofile (isdeleted);
+
+
+
+/****************************************************************************************************************
+Name : Nilesh
+Date : 30-JUL-2018
+****************************************************************************************************************/
+
+/*************** Add IsDeleted & DeletedOn field in location table. ***********/
+
+ALTER TABLE location ADD isdeleted bit NULL;
+
+ALTER TABLE location ADD deletedon datetime NULL;
+
+/******** Add index to isdeleted columns ****/
+
+CREATE INDEX idx_location_isdeleted ON location (isdeleted);
+
+/****************************************************************************************************************
+Name : Nilesh
+Date : 31-JUL-2018
+****************************************************************************************************************/
+
+/*************** Add Company, IsDeleted & DeletedOn field in irrigation table. ***********/
+
+ALTER TABLE irrigation ADD isdeleted bit NULL;
+
+ALTER TABLE irrigation ADD deletedon datetime NULL;
+
+ALTER TABLE irrigation ADD company bigint(20) NULL;
+
+/******** Add index to isdeleted columns ****/
+
+CREATE INDEX idx_irrigation_isdeleted ON irrigation (isdeleted);
