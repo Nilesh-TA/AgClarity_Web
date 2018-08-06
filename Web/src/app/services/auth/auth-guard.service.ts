@@ -43,6 +43,8 @@ export class AuthGuard implements CanActivate {
       case "add-location":
       case "add-irrigation":
       case "irrigation-location":
+      case "add-watersource":
+      case "watersource-location":
         isPageAccessible = this.commonService.hasCreateAccess(userAccessRole);
         break;
       case "list-company":
@@ -58,6 +60,8 @@ export class AuthGuard implements CanActivate {
       case "list-location":
       case "list-irrigation":
       case "irrigation-location":
+      case "list-watersource":
+      case "watersource-location":
         isPageAccessible = this.commonService.hasReadAccess(userAccessRole);
         break;
       case "edit-company/:id":
@@ -73,6 +77,8 @@ export class AuthGuard implements CanActivate {
       case "edit-location/:id":
       case "edit-irrigation/:id":
       case "irrigation-location":
+      case "edit-watersource/:id":
+      case "watersource-location":
         isPageAccessible = this.commonService.hasUpdateAccess(userAccessRole);
         break;
       case "view-company/:id":
@@ -88,6 +94,8 @@ export class AuthGuard implements CanActivate {
       case "view-location/:id":
       case "view-irrigation/:id":
       case "irrigation-location":
+      case "view-watersource/:id":
+      case "watersource-location":
         isPageAccessible = this.commonService.hasReadAccess(userAccessRole);
         break;
       default:

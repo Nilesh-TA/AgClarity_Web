@@ -68,6 +68,11 @@ import { AddIrrigationComponent } from './components/add-irrigation/add-irrigati
 import { EditIrrigationComponent } from './components/edit-irrigation/edit-irrigation.component';
 import { ViewIrrigationComponent } from './components/view-irrigation/view-irrigation.component';
 import { IrrigationLocationComponent } from './components/irrigation-location/irrigation-location.component';
+import { ListWaterSourceComponent } from './components/list-water-source/list-water-source.component';
+import { AddWaterSourceComponent } from './components/add-water-source/add-water-source.component';
+import { EditWaterSourceComponent } from './components/edit-water-source/edit-water-source.component';
+import { ViewWaterSourceComponent } from './components/view-water-source/view-water-source.component';
+import { WaterSourceLocationComponent } from './components/water-source-location/water-source-location.component';
 
 //@Services
 import { CONFIG } from './constant/config';
@@ -90,6 +95,7 @@ import { SubscriptionService } from './services/subscription.service';
 import { ContactProfileService } from './services/contact-profile.service';
 import { LocationService } from './services/location.service';
 import { IrrigationService } from './services/irrigation.service';
+import { WaterSourceService } from './services/water-source.service';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -154,7 +160,12 @@ export function tokenGetter() {
     AddIrrigationComponent,
     EditIrrigationComponent,
     ViewIrrigationComponent,
-    IrrigationLocationComponent,    
+    IrrigationLocationComponent,
+    ListWaterSourceComponent,
+    AddWaterSourceComponent,
+    EditWaterSourceComponent,
+    ViewWaterSourceComponent,
+    WaterSourceLocationComponent,    
   ],
   imports: [
     BrowserModule,
@@ -201,6 +212,7 @@ export function tokenGetter() {
     ContactProfileService,
     LocationService,
     IrrigationService,
+    WaterSourceService,
     CONFIG,
     REGEXP,
     DICTIONARY,

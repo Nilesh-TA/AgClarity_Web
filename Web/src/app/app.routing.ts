@@ -85,6 +85,15 @@ import { ListIrrigationComponent } from './components/list-irrigation/list-irrig
 //Irrigation Location Page
 import { IrrigationLocationComponent } from './components/irrigation-location/irrigation-location.component';
 
+//WaterSource Location
+import { ListWaterSourceComponent } from './components/list-water-source/list-water-source.component';
+import { ViewWaterSourceComponent } from './components/view-water-source/view-water-source.component';
+import { EditWaterSourceComponent } from './components/edit-water-source/edit-water-source.component';
+import { AddWaterSourceComponent } from './components/add-water-source/add-water-source.component';
+
+//WaterSource Location Page
+import { WaterSourceLocationComponent } from './components/water-source-location/water-source-location.component';
+
 //Select Company
 import { SelectCompanyComponent } from './components/select-company/select-company.component';
 
@@ -386,6 +395,40 @@ export const appRoutes: Routes = [
         component: IrrigationLocationComponent,
         canActivate: [AuthGuard],
         data: { Entity: "IrrigationLocation" }
+    },
+
+     //WaterSource
+     {
+        path: 'add-watersource',
+        component: AddWaterSourceComponent,
+        canActivate: [AuthGuard],
+        data: { IsSelectCompany: true, Entity: "WaterSource" }
+    },
+    {
+        path: 'edit-watersource/:id',
+        component: EditWaterSourceComponent,
+        canActivate: [AuthGuard],
+        data: { IsSelectCompany: true, Entity: "WaterSource" }
+    },
+    {
+        path: 'view-watersource/:id',
+        component: ViewWaterSourceComponent,
+        canActivate: [AuthGuard],
+        data: { IsSelectCompany: true, Entity: "WaterSource" }
+    },
+    {
+        path: 'list-watersource',
+        component: ListWaterSourceComponent,
+        canActivate: [AuthGuard],
+        data: { IsSelectCompany: true, Entity: "WaterSource" }
+    },
+
+    //WaterSource Location
+    {
+        path: 'watersource-location',
+        component: WaterSourceLocationComponent,
+        canActivate: [AuthGuard],
+        data: { Entity: "WaterSourceLocation" }
     },
 
 

@@ -7,12 +7,12 @@
   </div>
   <!-- Dropdowns -->
   <div class="pt10">
-    <form class="form-horizontal" novalidate [formGroup]="irrigationLocationForm" (submit)="onSubmit()">
+    <form class="form-horizontal" novalidate [formGroup]="watersourceLocationForm" (submit)="onSubmit()">
       <div class="">
         <div class="form-group">
-          <div class="col-sm-12 col-md-9 col-lg-8 col-xs-12" *ngIf="irrigationName">
-            <label class="control-label display-inline" for="irrigationName">Irrigation : </label>
-            <span class="m-l-md display-inline"> {{ irrigationName }}</span>
+          <div class="col-sm-12 col-md-9 col-lg-8 col-xs-12" *ngIf="watersourceName">
+            <label class="control-label display-inline" for="watersourceName">Water Source : </label>
+            <span class="m-l-md display-inline"> {{ watersourceName }}</span>
           </div>
           <div class="clearfix"></div>
         </div>
@@ -31,8 +31,8 @@
               <tr>
                 <td>
                   <div>
-                    <select class="form-control multiple-selectbox-width" multiple id="selectedAvailableItems" name="selectedAvailableItems"
-                      size="10" formControlName="selectedAvailableItems" [(ngModel)]="selectedAvailableItems">
+                    <select class="form-control multiple-selectbox-width" multiple id="availableItems" name="availableItems"
+                      size="10" formControlName="availableItems" [(ngModel)]="availableItems">
                       <option *ngFor="let item of AvailableList | orderBy: 'name'" [value]="item">
                         {{ item.name }}
                       </option>
@@ -52,8 +52,8 @@
                 </td>
                 <td>
                   <div>
-                    <select class="form-control multiple-selectbox-width" multiple id="selectedLocationItems" name="selectedLocationItems" size="10"
-                      formControlName="selectedLocationItems" [(ngModel)]="selectedLocationItems">
+                    <select class="form-control multiple-selectbox-width" multiple id="selectedItems" name="selectedItems" size="10"
+                      formControlName="selectedItems" [(ngModel)]="selectedItems">
                       <option *ngFor="let item of SelectedList | orderBy: 'name'" [value]="item">
                         {{ item.name }}
                       </option>
@@ -73,7 +73,7 @@
           <a href="javascript:void(0);" class="mr10" (click)="onSubmit()">
             <i class="fa fa-check-circle save_icon"></i>
           </a>
-          <a href="javascript:void(0);" (click)="backToIrrigation()">
+          <a href="javascript:void(0);" (click)="backToWaterSource()">
             <i class="fa fa-times-circle cancel_icon"></i>
           </a>
         </div>

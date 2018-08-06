@@ -219,3 +219,21 @@ ALTER TABLE irrigation ADD company bigint(20) NULL;
 /******** Add index to isdeleted columns ****/
 
 CREATE INDEX idx_irrigation_isdeleted ON irrigation (isdeleted);
+
+
+/****************************************************************************************************************
+Name : Nilesh
+Date : 02-AUG-2018
+****************************************************************************************************************/
+
+/*************** Add Company, IsDeleted & DeletedOn field in watersource table. ***********/
+
+ALTER TABLE watersource ADD isdeleted bit NULL;
+
+ALTER TABLE watersource ADD deletedon datetime NULL;
+
+ALTER TABLE watersource ADD company bigint(20) NULL;
+
+/******** Add index to isdeleted columns ****/
+
+CREATE INDEX idx_watersource_isdeleted ON watersource (isdeleted);

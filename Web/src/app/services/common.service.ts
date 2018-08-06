@@ -223,7 +223,7 @@ export class CommonService {
           this.router.navigate(['list-location']);
           break;
         case "water source":
-          this.router.navigate(['list-water-source']);
+          this.router.navigate(['list-watersource']);
           break;
       }
     }

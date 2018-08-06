@@ -28,6 +28,8 @@ const emailRouter = require('./routes/email');
 const locationRouter = require('./routes/location');
 const irrigationRouter = require('./routes/irrigation');
 const irrigationlocationRouter = require('./routes/irrigationlocation');
+const watersourceRouter = require('./routes/watersource');
+const watersourcelocationRouter = require('./routes/watersourcelocation');
 
 const app = express();
 const router = express.Router();
@@ -74,6 +76,8 @@ app.use('/api/email', emailRouter);
 app.use('/api/location', locationRouter);
 app.use('/api/irrigation', irrigationRouter);
 app.use('/api/irrigationlocation', irrigationlocationRouter);
+app.use('/api/watersource', watersourceRouter);
+app.use('/api/watersourcelocation', watersourcelocationRouter);
 app.post('/api/authenticate', authController);
 
 // catch 404 and forward to error handler

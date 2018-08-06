@@ -1,6 +1,6 @@
 //@Packages
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 
@@ -8,12 +8,12 @@ import { ToastrService } from 'ngx-toastr';
 import { CommonService } from '../../services/common.service';
 import { ErrorService } from '../../services/error.service';
 import { DictionaryService } from '../../services/dictionary.service';
-import { IrrigationService } from '../../services/irrigation.service';
+import { WaterSourceService } from '../../services/water-source.service';
 import { LocationService } from '../../services/location.service';
 import { StorageService } from '../../services/storage.service';
 
 //@Models
-import { IrrigationLocationVM, PayLoadIrrigationLocation } from '../../models/IrrigationLocationVM';
+import { WaterSourceLocationVM, PayLoadWaterSourceLocation } from '../../models/WaterSourceLocationVM';
 import { LocationVM } from '../../models/LocationVM';
 
 //@Constant
@@ -22,24 +22,24 @@ import { MICROAPP } from '../../constant/microapp';
 import { REGEXP } from '../../constant/regexp';
 
 @Component({
-  selector: 'app-irrigation-location',
-  templateUrl: './irrigation-location.component.html',
-  styleUrls: ['./irrigation-location.component.css']
+  selector: 'app-water-source-location',
+  templateUrl: './water-source-location.component.html',
+  styleUrls: ['./water-source-location.component.css']
 })
-export class IrrigationLocationComponent implements OnInit {
+export class WaterSourceLocationComponent implements OnInit {
 
-  irrigationLocationForm: FormGroup;
-  pageName: string = "Irrigation Location";
+  watersourceLocationForm: FormGroup;
+  pageName: string = "WaterSource Location";
 
-  oldIrrigationLocation: IrrigationLocationVM[] = [];
+  oldWaterSourceLocation: WaterSourceLocationVM[] = [];
 
-  ID_irrigation?: number;
+  ID_watersource?: number;
   companyId?: number;
   action: string;
-  irrigationName: string = "";
+  watersourceName: string = "";
 
-  selectedAvailableItems: any[] = [];
-  selectedLocationItems: any[] = [];
+  availableItems: any[] = [];
+  selectedItems: any[] = [];
 
   SelectedList = [];
   AvailableList = [];
@@ -55,12 +55,12 @@ export class IrrigationLocationComponent implements OnInit {
     public commonService: CommonService,
     public storageService: StorageService,
     public errorService: ErrorService,
-    public irrigationService: IrrigationService,
+    public waterSourceService: WaterSourceService,
     public dictionaryService: DictionaryService,
     public locationService: LocationService) {
 
     this.route.queryParams.subscribe(params => {
-      this.ID_irrigation = !this.commonService.isNullOrEmpty(params["id"]) ? +params["id"] : 0;
+      this.ID_watersource = !this.commonService.isNullOrEmpty(params["id"]) ? +params["id"] : 0;
       this.companyId = !this.commonService.isNullOrEmpty(params["company"]) ? +params["company"] : 0;
       this.action = params["action"];
     });
@@ -83,38 +83,38 @@ export class IrrigationLocationComponent implements OnInit {
   }
 
   rebuildForm() {
-    this.irrigationLocationForm = this.fb.group({
-      selectedAvailableItems: [this.selectedAvailableItems],
-      selectedLocationItems: [this.selectedLocationItems]
+    this.watersourceLocationForm = this.fb.group({
+      availableItems: [this.availableItems],
+      selectedItems: [this.selectedItems]
     });
   }
 
   initializeFormValue() {
     this.commonService.showLoader();
 
-    if (this.irrigationService.irrigationFormData != null) {
-      this.irrigationName = this.irrigationService.irrigationFormData.name;
+    if (this.waterSourceService.watersourceFormData != null) {
+      this.watersourceName = this.waterSourceService.watersourceFormData.name;
     }
 
     //Bind dropdown values    
     Promise.all(
       [
-        this.getIrrigationLocations(this.ID_irrigation),
+        this.getWaterSourceLocations(this.ID_watersource),
         this.getAvailableLocation(this.companyId)
       ]).then((data: any) => {
 
         if (data != null) {
-          let irrigationLocationResult = data[0];
+          let watersourceLocationResult = data[0];
           let availableLocationResult = data[1];
 
-          //Irrigation-Location Detail
-          if (irrigationLocationResult != null && irrigationLocationResult.success) {
-            let irrigationLocationItems = irrigationLocationResult.data;
-            if (irrigationLocationItems.success) {
-              const irrigationLocations = irrigationLocationItems.data as IrrigationLocationVM[];
+          //WaterSource-Location Detail
+          if (watersourceLocationResult != null && watersourceLocationResult.success) {
+            let watersourceLocationItems = watersourceLocationResult.data;
+            if (watersourceLocationItems.success) {
+              const watersourceLocations = watersourceLocationItems.data as WaterSourceLocationVM[];
 
-              if (irrigationLocations != null && irrigationLocations.length > 0) {
-                irrigationLocations.forEach(element => {
+              if (watersourceLocations != null && watersourceLocations.length > 0) {
+                watersourceLocations.forEach(element => {
 
                   let location = {
                     ID_location: element.location,
@@ -122,13 +122,13 @@ export class IrrigationLocationComponent implements OnInit {
                   }
                   this.SelectedList.push(location);
 
-                  let irrigationLocation = {
-                    ID_irrigation_location: element.ID_irrigation_location,
-                    irrigation: element.irrigation,
+                  let watersourceLocation = {
+                    ID_watersource_location: element.ID_watersource_location,
+                    watersource: element.watersource,
                     location: element.location,
                     location_name: element.location_name
                   }
-                  this.oldIrrigationLocation.push(irrigationLocation);
+                  this.oldWaterSourceLocation.push(watersourceLocation);
 
                 });
 
@@ -157,8 +157,8 @@ export class IrrigationLocationComponent implements OnInit {
             }
           }
 
-          this.selectedAvailableItems = [];
-          this.selectedLocationItems = [];
+          this.availableItems = [];
+          this.selectedItems = [];
 
           this.commonService.hideLoader();
         }
@@ -178,9 +178,9 @@ export class IrrigationLocationComponent implements OnInit {
     });
   }
 
-  getIrrigationLocations(irrigationId) {
+  getWaterSourceLocations(watersourceId) {
     return new Promise((resolve, reject) => {
-      this.irrigationService.getIrrigationLocationByIrrigationId(irrigationId).subscribe(res => {
+      this.waterSourceService.getWatersourceLocationByWaterSourceId(watersourceId).subscribe(res => {
         resolve({ success: true, data: res });
       }, error => {
         resolve({ success: false, data: error });
@@ -189,20 +189,20 @@ export class IrrigationLocationComponent implements OnInit {
   }
 
   setSelectedItems() {
-    const selectedAvailableItems = this.selectedAvailableItems;
+    const availableItems = this.availableItems;
 
-    if (this.commonService.isNullOrEmpty(selectedAvailableItems)) {
+    if (this.commonService.isNullOrEmpty(availableItems)) {
       this.toastr.error("Please select at least one item from available list.", "Error!", { timeOut: 3000, closeButton: true });
       return false;
     }
 
     //move selected
-    selectedAvailableItems.forEach(element => {
+    availableItems.forEach(element => {
       this.SelectedList.push(element);
     });
 
     //remove the ones that were moved.
-    selectedAvailableItems.forEach(element => {
+    availableItems.forEach(element => {
       for (let i = this.AvailableList.length - 1; i >= 0; i--) {
         if (this.AvailableList[i].ID_location == element.ID_location) {
           this.AvailableList.splice(i, 1);
@@ -210,24 +210,24 @@ export class IrrigationLocationComponent implements OnInit {
       }
     });
 
-    this.selectedAvailableItems = [];
+    this.availableItems = [];
   }
 
   setAvailableItems() {
-    const selectedLocationItems = this.selectedLocationItems;
+    const selectedItems = this.selectedItems;
 
-    if (this.commonService.isNullOrEmpty(selectedLocationItems)) {
+    if (this.commonService.isNullOrEmpty(selectedItems)) {
       this.toastr.error("Please select at least one item from locations list.", "Error!", { timeOut: 3000, closeButton: true });
       return false;
     }
 
     //move selected
-    selectedLocationItems.forEach(element => {
+    selectedItems.forEach(element => {
       this.AvailableList.push(element);
     });
 
     //remove the ones that were moved from the source container.
-    selectedLocationItems.forEach(element => {
+    selectedItems.forEach(element => {
       for (let i = this.SelectedList.length - 1; i >= 0; i--) {
         if (this.SelectedList[i].ID_location == element.ID_location) {
           this.SelectedList.splice(i, 1);
@@ -235,29 +235,29 @@ export class IrrigationLocationComponent implements OnInit {
       }
     });
 
-    this.selectedLocationItems = [];
+    this.selectedItems = [];
   }
 
 
   onSubmit() {
     this.commonService.hideLoader();
 
-    let irrigationLocationFormData = this.prepareBodyToPost();
+    let watersourceLocationFormData = this.prepareBodyToPost();
 
-    this.irrigationService.irrigationLocationFormData = irrigationLocationFormData;
+    this.waterSourceService.watersourceLocationFormData = watersourceLocationFormData;
 
     if (this.action == "add") {
-      this.router.navigate(['/add-irrigation']);
+      this.router.navigate(['/add-watersource']);
     }
     else if (this.action == "edit") {
-      this.router.navigate(['/edit-irrigation', this.ID_irrigation]);
+      this.router.navigate(['/edit-watersource', this.ID_watersource]);
     } else {
       this.router.navigate(['']);
     }
   }
 
-  prepareBodyToPost() {
-    let bodyToPost = new PayLoadIrrigationLocation();
+  prepareBodyToPost() {    
+    let bodyToPost = new PayLoadWaterSourceLocation();
     bodyToPost.add = [];
     bodyToPost.delete = [];
     bodyToPost.update = {
@@ -269,15 +269,15 @@ export class IrrigationLocationComponent implements OnInit {
 
 
     //Find location which are removed.
-    for (let i = 0; i < this.oldIrrigationLocation.length; i++) {
-      const location = this.oldIrrigationLocation[i].location;
+    for (let i = 0; i < this.oldWaterSourceLocation.length; i++) {
+      const location = this.oldWaterSourceLocation[i].location;
 
       let item = this.SelectedList.find(i => i.ID_location === location);
 
       const exist = item ? true : false;
 
       if (!exist) {
-        bodyToPost.delete.push(this.oldIrrigationLocation[i].ID_irrigation_location);
+        bodyToPost.delete.push(this.oldWaterSourceLocation[i].ID_watersource_location);
       }
     }
 
@@ -287,11 +287,11 @@ export class IrrigationLocationComponent implements OnInit {
         const ID_location = this.SelectedList[i].ID_location;
         const location_name = this.SelectedList[i].name;
 
-        //Existing irrigation location.
-        const irrigationlocation_detail = this.oldIrrigationLocation.find(i => i.location === ID_location);
+        //Existing watersource location.
+        const watersourcelocation_detail = this.oldWaterSourceLocation.find(i => i.location === ID_location);
 
-        if (!irrigationlocation_detail) {
-          //Create irrigation location.
+        if (!watersourcelocation_detail) {
+          //Create watersource location.
           let body = this.getBodyToPost(0, ID_location, location_name);
 
           bodyToPost.add.push(body);
@@ -304,23 +304,23 @@ export class IrrigationLocationComponent implements OnInit {
 
   getBodyToPost(id, locationId, name) {
     let body: any = {
-      ID_irrigation_location: id,
-      irrigation: this.ID_irrigation,
+      ID_watersource_location: id,
+      watersource: this.ID_watersource,
       location: locationId,
       location_name: name
     }
     return body;
   }
 
-  backToIrrigation() {
+  backToWaterSource() {
     this.commonService.hideLoader();
 
     if (this.action == "add") {
-      this.irrigationService.irrigationLocationFormData = null;
-      this.router.navigate(['/add-irrigation']);
+      this.waterSourceService.watersourceLocationFormData = null;
+      this.router.navigate(['/add-watersource']);
     }
     else if (this.action == "edit") {
-      this.router.navigate(['/edit-irrigation', this.ID_irrigation]);
+      this.router.navigate(['/edit-watersource', this.ID_watersource]);
     } else {
       this.router.navigate(['']);
     }

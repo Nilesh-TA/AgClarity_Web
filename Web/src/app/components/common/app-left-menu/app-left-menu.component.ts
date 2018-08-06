@@ -59,7 +59,7 @@ export class AppLeftMenuComponent implements OnInit {
           this.router.navigate(['list-location']);
           break;
         case "WaterSource":
-          this.router.navigate(['list-water-source']);
+          this.router.navigate(['list-watersource']);
           break;
       }
     }
