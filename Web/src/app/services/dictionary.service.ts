@@ -26,7 +26,6 @@ export class DictionaryService {
     this.apiUrl = _api.ServerWithApiUrl;
   }
 
-
   searchDictionary(pageno: number, pagesize: number) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -47,12 +46,12 @@ export class DictionaryService {
     headers.append('Content-Type', 'application/json');
     this._api.setAuthHeader(headers);
 
-    return this._httpService.get(`${this.apiUrl}dictionary/${code}`, { headers: headers })
+    return this._httpService.get(`${this.apiUrl}dictionary/GetDictionaryByCode/${code}`, { headers: headers })
       .pipe(
         map((response: any) => {
           return response.json();
         }), catchError((errorRes: any) => {
-          return this._secureService.handleError(errorRes, `${this.apiUrl}dictionary/${code}`);
+          return this._secureService.handleError(errorRes, `${this.apiUrl}dictionary/GetDictionaryByCode/${code}`);
         })
       );
   }
@@ -68,6 +67,92 @@ export class DictionaryService {
           return response.json();
         }), catchError((errorRes: any) => {
           return this._secureService.handleError(errorRes, `${this.apiUrl}dictionary/GetContactSource`);
+        })
+      );
+  }
+
+  getDictionaryById(id: number) {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    this._api.setAuthHeader(headers);
+
+    return this._httpService.get(`${this.apiUrl}dictionary/${id}`, { headers: headers })
+      .pipe(
+        map((response: any) => {
+          return response.json();
+        }), catchError((errorRes: any) => {
+          return this._secureService.handleError(errorRes, `${this.apiUrl}dictionary/${id}`);
+        })
+      );
+  }
+
+  createDictionary(Dictionary: DictionaryVM) {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    this._api.setAuthHeader(headers);
+
+    const postBody = JSON.stringify(Dictionary);
+
+    return this._httpService.post(`${this.apiUrl}dictionary`, postBody, { headers: headers })
+      .pipe(
+        map((response: any) => {
+          return response.json();
+        }), catchError((errorRes: any) => {
+          return this._secureService.handleError(errorRes, `${this.apiUrl}dictionary`);
+        })
+      );
+  }
+
+  updateDictionary(Dictionary: DictionaryVM) {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    this._api.setAuthHeader(headers);
+
+    const postBody = JSON.stringify(Dictionary);
+
+    return this._httpService.put(`${this.apiUrl}dictionary/${Dictionary.ID_dictionary}`, postBody, { headers: headers })
+      .pipe(
+        map((response: any) => {
+          return response.json();
+        }), catchError((errorRes: any) => {
+          return this._secureService.handleError(errorRes, `${this.apiUrl}dictionary/${Dictionary.ID_dictionary}`);
+        })
+      );
+  }
+
+  deleteDictionary(id: number) {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    this._api.setAuthHeader(headers);
+
+    return this._httpService.delete(`${this.apiUrl}dictionary/${id}`, { headers: headers })
+      .pipe(
+        map((response: any) => {
+          return response.json();
+        }), catchError((errorRes: any) => {
+          return this._secureService.handleError(errorRes, `${this.apiUrl}dictionary/${id}`);
+        })
+      );
+  }
+
+  trackUserAction(action, appname, user, id, oldDictionary: any, newDictionary: any) {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    this._api.setAuthHeader(headers);
+
+    let obj = {
+      old: oldDictionary,
+      new: newDictionary
+    }
+
+    const postBody = JSON.stringify(obj);
+
+    return this._httpService.post(`${this.apiUrl}dictionary/TrackUserAction?action=${action}&appname=${appname}&user=${user}&id=${id}`, postBody, { headers: headers })
+      .pipe(
+        map((response: any) => {
+          return response.json();
+        }), catchError((errorRes: any) => {
+          return this._secureService.handleError(errorRes, `${this.apiUrl}dictionary/TrackUserAction?action=${action}&appname=${appname}&user=${user}&id=${id}`);
         })
       );
   }

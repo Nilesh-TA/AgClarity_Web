@@ -20,6 +20,7 @@ export class DICTIONARY {
     public Master_Data: string = "Master_Data";
     public MicroApp: string = "MicroApp";
     public Pest_Type: string = "Pest_type";
+    public Provider_Type: string = "Provider_Type";
     public Recommendation_Type: string = "Recommendation_type";
     public Role: string = "role";
     public Sensor_Type: string = "Sensor_Type";

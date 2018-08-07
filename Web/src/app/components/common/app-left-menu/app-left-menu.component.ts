@@ -28,6 +28,9 @@ export class AppLeftMenuComponent implements OnInit {
 
       //Redirect page.
       switch (pageName) {
+        case "Dictionary":
+          this.router.navigate(['list-dictionary']);
+          break;
         case "Chemical":
           this.router.navigate(['list-chemical']);
           break;

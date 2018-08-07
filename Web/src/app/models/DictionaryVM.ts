@@ -1,6 +1,14 @@
 export class DictionaryVM {
-    id_dictionary: number;
+    ID_dictionary: number;
     code: string;
     value: string;
-    description: string;    
+    description: string;
+}
+
+export class SearchDictionaryVM {
+    TotalRows: number;
+    ID_dictionary: number;
+    code: string;
+    value: string;
+    description: string;
 }

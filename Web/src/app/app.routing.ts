@@ -97,6 +97,12 @@ import { WaterSourceLocationComponent } from './components/water-source-location
 //Select Company
 import { SelectCompanyComponent } from './components/select-company/select-company.component';
 
+//Dictionary
+import { AddDictionaryComponent } from './components/add-dictionary/add-dictionary.component';
+import { EditDictionaryComponent } from './components/edit-dictionary/edit-dictionary.component';
+import { ViewDictionaryComponent } from './components/view-dictionary/view-dictionary.component';
+import { ListDictionaryComponent } from './components/list-dictionary/list-dictionary.component';
+
 //Unauthorize Page
 import { UnauthorizeComponent } from './components/unauthorize/unauthorize.component';
 
@@ -124,8 +130,8 @@ export const appRoutes: Routes = [
         component: SelectCompanyComponent,
     },
 
-     //User Profile
-     {
+    //User Profile
+    {
         path: 'user-profile',
         component: UserProfileComponent,
         canActivate: [AuthGuard]
@@ -326,7 +332,7 @@ export const appRoutes: Routes = [
         path: 'company-access',
         component: CompanyAccessComponent,
         canActivate: [AuthGuard],
-        data: { Entity: "CompanyAccess" }
+        data: { IsSelectCompany: false, Entity: "CompanyAccess" }
     },
 
     //Contact Access
@@ -334,7 +340,7 @@ export const appRoutes: Routes = [
         path: 'contact-access',
         component: ContactAccessComponent,
         canActivate: [AuthGuard],
-        data: { Entity: "ContactAccess" }
+        data: { IsSelectCompany: false, Entity: "ContactAccess" }
     },
 
     //Location
@@ -394,11 +400,11 @@ export const appRoutes: Routes = [
         path: 'irrigation-location',
         component: IrrigationLocationComponent,
         canActivate: [AuthGuard],
-        data: { Entity: "IrrigationLocation" }
+        data: { IsSelectCompany: false, Entity: "IrrigationLocation" }
     },
 
-     //WaterSource
-     {
+    //WaterSource
+    {
         path: 'add-watersource',
         component: AddWaterSourceComponent,
         canActivate: [AuthGuard],
@@ -428,7 +434,33 @@ export const appRoutes: Routes = [
         path: 'watersource-location',
         component: WaterSourceLocationComponent,
         canActivate: [AuthGuard],
-        data: { Entity: "WaterSourceLocation" }
+        data: { IsSelectCompany: false, Entity: "WaterSourceLocation" }
+    },
+
+    //Dictionary
+    {
+        path: 'add-dictionary',
+        component: AddDictionaryComponent,
+        canActivate: [AuthGuard],
+        data: { IsSelectCompany: false, Entity: "Dictionary" }
+    },
+    {
+        path: 'edit-dictionary/:id',
+        component: EditDictionaryComponent,
+        canActivate: [AuthGuard],
+        data: { IsSelectCompany: false, Entity: "Dictionary" }
+    },
+    {
+        path: 'view-dictionary/:id',
+        component: ViewDictionaryComponent,
+        canActivate: [AuthGuard],
+        data: { IsSelectCompany: false, Entity: "Dictionary" }
+    },
+    {
+        path: 'list-dictionary',
+        component: ListDictionaryComponent,
+        canActivate: [AuthGuard],
+        data: { IsSelectCompany: false, Entity: "Dictionary" }
     },
 
 

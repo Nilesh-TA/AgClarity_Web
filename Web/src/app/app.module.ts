@@ -73,6 +73,10 @@ import { AddWaterSourceComponent } from './components/add-water-source/add-water
 import { EditWaterSourceComponent } from './components/edit-water-source/edit-water-source.component';
 import { ViewWaterSourceComponent } from './components/view-water-source/view-water-source.component';
 import { WaterSourceLocationComponent } from './components/water-source-location/water-source-location.component';
+import { ListDictionaryComponent } from './components/list-dictionary/list-dictionary.component';
+import { AddDictionaryComponent } from './components/add-dictionary/add-dictionary.component';
+import { EditDictionaryComponent } from './components/edit-dictionary/edit-dictionary.component';
+import { ViewDictionaryComponent } from './components/view-dictionary/view-dictionary.component';
 
 //@Services
 import { CONFIG } from './constant/config';
@@ -165,7 +169,11 @@ export function tokenGetter() {
     AddWaterSourceComponent,
     EditWaterSourceComponent,
     ViewWaterSourceComponent,
-    WaterSourceLocationComponent,    
+    WaterSourceLocationComponent,
+    ListDictionaryComponent,
+    AddDictionaryComponent,
+    EditDictionaryComponent,
+    ViewDictionaryComponent,    
   ],
   imports: [
     BrowserModule,

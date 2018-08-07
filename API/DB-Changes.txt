@@ -237,3 +237,20 @@ ALTER TABLE watersource ADD company bigint(20) NULL;
 /******** Add index to isdeleted columns ****/
 
 CREATE INDEX idx_watersource_isdeleted ON watersource (isdeleted);
+
+
+
+/****************************************************************************************************************
+Name : Nilesh
+Date : 06-AUG-2018
+****************************************************************************************************************/
+
+/*************** Add IsDeleted & DeletedOn field in dictionary table. ***********/
+
+ALTER TABLE dictionary ADD isdeleted bit NULL;
+
+ALTER TABLE dictionary ADD deletedon datetime NULL;
+
+/******** Add index to isdeleted columns ****/
+
+CREATE INDEX idx_dictionary_isdeleted ON dictionary (isdeleted);

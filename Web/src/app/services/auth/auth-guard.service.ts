@@ -45,6 +45,7 @@ export class AuthGuard implements CanActivate {
       case "irrigation-location":
       case "add-watersource":
       case "watersource-location":
+      case "add-dictionary":
         isPageAccessible = this.commonService.hasCreateAccess(userAccessRole);
         break;
       case "list-company":
@@ -62,6 +63,7 @@ export class AuthGuard implements CanActivate {
       case "irrigation-location":
       case "list-watersource":
       case "watersource-location":
+      case "list-dictionary":
         isPageAccessible = this.commonService.hasReadAccess(userAccessRole);
         break;
       case "edit-company/:id":
@@ -79,6 +81,7 @@ export class AuthGuard implements CanActivate {
       case "irrigation-location":
       case "edit-watersource/:id":
       case "watersource-location":
+      case "edit-dictionary/:id":
         isPageAccessible = this.commonService.hasUpdateAccess(userAccessRole);
         break;
       case "view-company/:id":
@@ -96,6 +99,7 @@ export class AuthGuard implements CanActivate {
       case "irrigation-location":
       case "view-watersource/:id":
       case "watersource-location":
+      case "view-dictionary/:id":
         isPageAccessible = this.commonService.hasReadAccess(userAccessRole);
         break;
       default:
@@ -109,6 +113,7 @@ export class AuthGuard implements CanActivate {
       switch (entity) {
         case "Company":
         case "Subscription":
+        case "Dictionary":
           if (userAccessRole != "AgrisourceData Admin") {
             isPageAccessible = false;
           }

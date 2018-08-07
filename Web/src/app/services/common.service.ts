@@ -192,6 +192,9 @@ export class CommonService {
 
       //Redirect page.
       switch (this.Lower(masterData)) {
+        case "dictionary":
+          this.router.navigate(['list-dictionary']);
+          break;
         case "chemical":
           this.router.navigate(['list-chemical']);
           break;
