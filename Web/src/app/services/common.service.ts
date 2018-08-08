@@ -228,6 +228,12 @@ export class CommonService {
         case "water source":
           this.router.navigate(['list-watersource']);
           break;
+        case "address":
+          this.router.navigate(['list-address']);
+          break;
+        case "provider":
+          this.router.navigate(['list-provider']);
+          break;
       }
     }
 

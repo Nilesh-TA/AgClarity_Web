@@ -77,6 +77,10 @@ import { ListDictionaryComponent } from './components/list-dictionary/list-dicti
 import { AddDictionaryComponent } from './components/add-dictionary/add-dictionary.component';
 import { EditDictionaryComponent } from './components/edit-dictionary/edit-dictionary.component';
 import { ViewDictionaryComponent } from './components/view-dictionary/view-dictionary.component';
+import { ListAddressComponent } from './components/list-address/list-address.component';
+import { AddAddressComponent } from './components/add-address/add-address.component';
+import { EditAddressComponent } from './components/edit-address/edit-address.component';
+import { ViewAddressComponent } from './components/view-address/view-address.component';
 
 //@Services
 import { CONFIG } from './constant/config';
@@ -100,6 +104,7 @@ import { ContactProfileService } from './services/contact-profile.service';
 import { LocationService } from './services/location.service';
 import { IrrigationService } from './services/irrigation.service';
 import { WaterSourceService } from './services/water-source.service';
+import { AddressService } from './services/address.service';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -173,7 +178,11 @@ export function tokenGetter() {
     ListDictionaryComponent,
     AddDictionaryComponent,
     EditDictionaryComponent,
-    ViewDictionaryComponent,    
+    ViewDictionaryComponent,
+    ListAddressComponent,
+    AddAddressComponent,
+    EditAddressComponent,
+    ViewAddressComponent,    
   ],
   imports: [
     BrowserModule,
@@ -221,6 +230,7 @@ export function tokenGetter() {
     LocationService,
     IrrigationService,
     WaterSourceService,
+    AddressService,
     CONFIG,
     REGEXP,
     DICTIONARY,
