@@ -1,0 +1,134 @@
+<div class="wrraper top-wrap clearfix">
+  <!-- Dropdowns -->
+  <app-common-nav-top [masterData]="pageName"></app-common-nav-top>
+  <!-- Dropdowns -->
+
+  <div class="pt10">
+    <form class="form-horizontal" novalidate [formGroup]="addForm" (submit)="onSubmit()">
+      <div class="">
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="name">Name: *</label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <input type="text" class="form-control" formControlName="name" id="name" placeholder="Name" name="name" [ngClass]="{'is-invalid':providerFormErrors.name, '': !providerFormErrors.name}"
+            />
+            <div [hidden]="!providerFormErrors.name" class="invalid-feedback">
+              {{ providerFormErrors.name }}
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="metric_imperial">Metric or Imperial: *</label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <select class="form-control" id="metric_imperial" name="metric_imperial" formControlName="metric_imperial" [ngClass]="{'is-invalid':providerFormErrors.metric_imperial, '': !providerFormErrors.metric_imperial}">
+              <option value="">-- Select UOM --</option>
+              <option *ngFor="let uom of uomList" [ngValue]="uom.value">
+                {{ uom.description }}
+              </option>
+            </select>
+            <div [hidden]="!providerFormErrors.metric_imperial" class="invalid-feedback">
+              {{ providerFormErrors.metric_imperial }}
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="type">Type: *</label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <select class="form-control" id="type" name="type" formControlName="type" [ngClass]="{'is-invalid':providerFormErrors.type, '': !providerFormErrors.type}">
+              <option value="">-- Select Provider Type --</option>
+              <option *ngFor="let providerType of providerTypeList" [ngValue]="providerType.value">
+                {{ providerType.value }}
+              </option>
+            </select>
+            <div [hidden]="!providerFormErrors.type" class="invalid-feedback">
+              {{ providerFormErrors.type }}
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="related_to">Related to:</label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <select class="form-control" id="related_to" name="related_to" formControlName="related_to">
+              <option value="">-- Select Related Provider --</option>
+              <option *ngFor="let provider of relatedToList" [ngValue]="provider.ID_provider">
+                {{ provider.name }}
+              </option>
+            </select>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="locationID">Location:</label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <select class="form-control" id="locationID" name="locationID" formControlName="locationID">
+              <option value="">-- Select Location --</option>
+              <option *ngFor="let location of locationList" [ngValue]="location.ID_location">
+                {{ location.name + ' ' + location.description }}
+              </option>
+            </select>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label" for="addressID">Address: *</label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <select class="form-control" id="addressID" name="addressID" formControlName="addressID" [ngClass]="{'is-invalid':providerFormErrors.addressID, '': !providerFormErrors.addressID}">
+              <option value="">-- Select Address --</option>
+              <option *ngFor="let address of addressList" [ngValue]="address.ID_address">
+                {{ address.address_1 + ' ' + address.city + ' ' + address.state + ' ' + address.postal_code + ' ' + address.country }}
+              </option>
+            </select>
+            <div [hidden]="!providerFormErrors.addressID" class="invalid-feedback">
+              {{ providerFormErrors.addressID }}
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3 col-lg-2 col-xs-12">
+            <label class="control-label"></label>
+          </div>
+          <div class="col-sm-12 col-md-6 col-lg-6 col-xs-12">
+            <button type="button" class="btn btn-sm btn-primary" (click)="createNewAddress();">
+              <i class="fa fa-plus"></i> Add New Address
+            </button>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+
+      </div>
+
+      <div class="col-md-12 col-sm-12 col-xs-12 padding-zero mb20">
+        <hr>
+        <div class="float-right">
+          <a href="javascript:void(0);" class="mr10" (click)="onSubmit()">
+            <i class="fa fa-check-circle save_icon"></i>
+          </a>
+          <a href="javascript:void(0);" (click)="backToList()">
+            <i class="fa fa-times-circle cancel_icon"></i>
+          </a>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,33 +1,33 @@
 const express = require('express');
 const router = express.Router();
-const Address = require('../models/address');
+const Provider = require('../models/provider');
 
-//Get All Addresses
-router.get('/', function (req, res, next) {    
-    Address.getAllAddresses(req.query.company, req.query.pageno, req.query.pagesize, function (err, rows) {        
+//Get All Providers
+router.get('/', function (req, res, next) {
+    Provider.getAllProviders(req.query.company, req.query.pageno, req.query.pagesize, function (err, rows) {
         if (err) {
             res.json({ success: false, message: err });
-        } else {                        
+        } else {
             res.json({ success: true, data: rows });
         }
     });
 });
 
-//Get Addresses
-router.get('/GetAddresses', function (req, res, next) {    
-    Address.getAddresses(function (err, rows) {        
+//Get Providers
+router.get('/GetProviders', function (req, res, next) {
+    Provider.getProviders(function (err, rows) {
         if (err) {
             res.json({ success: false, message: err });
-        } else {                        
+        } else {
             res.json({ success: true, data: rows });
         }
     });
 });
 
-//Get Address By Company Id
-router.get('/GetAddressByCompany', function (req, res, next) {        
+//Get Providers By Company Id
+router.get('/GetProvidersByCompany', function (req, res, next) {        
     if (req.query.company) {
-        Address.getAddressByCompany(req.query.company, function (err, rows) {                        
+        Provider.getProvidersByCompany(req.query.company, req.query.id, function (err, rows) {                        
             if (err) {
                 res.json({ success: false, message: err })
             } else {
@@ -39,10 +39,11 @@ router.get('/GetAddressByCompany', function (req, res, next) {
     }
 });
 
-//Get Address By Id
+
+//Get Provider By Id
 router.get('/:id?', function (req, res, next) {
     if (req.params.id) {
-        Address.getAddressById(req.params.id, function (err, rows) {
+        Provider.getProviderById(req.params.id, function (err, rows) {
             if (err) {
                 res.json({ success: false, message: err });
             } else {
@@ -50,28 +51,28 @@ router.get('/:id?', function (req, res, next) {
             }
         });
     } else {
-        res.json({ success: false, message: "Address id parameter missing." })
+        res.json({ success: false, message: "Provider id parameter missing." })
     }
 });
 
 //Track User Action.
-router.post('/TrackUserAction', function (req, res, next) {    
-    if(req.body){
+router.post('/TrackUserAction', function (req, res, next) {
+    if (req.body) {
         const oldObj = req.body.old;
         const newObj = req.body.new;
-        Address.trackUserAction(req.query.action, req.query.appname, req.query.user, req.query.id, oldObj, newObj, function (err, count) {
+        Provider.trackUserAction(req.query.action, req.query.appname, req.query.user, req.query.id, oldObj, newObj, function (err, count) {
             if (err) {
-                res.json({ success: false, message: err });            
+                res.json({ success: false, message: err });
             } else {
                 res.json({ success: true, data: req.body });
             }
         });
-    }    
+    }
 });
 
-//Create New Address
+//Create New Provider
 router.post('/', function (req, res, next) {
-    Address.addAddress(req.body, function (err, count) {        
+    Provider.addProvider(req.body, function (err, count) {
         if (err) {
             res.json({ success: false, message: err });
         } else {
@@ -80,9 +81,9 @@ router.post('/', function (req, res, next) {
     });
 });
 
-//Delete Address By Id
+//Delete Provider By Id
 router.delete('/:id', function (req, res, next) {
-    Address.deleteAddress(req.params.id, function (err, count) {
+    Provider.deleteProvider(req.params.id, function (err, count) {
         if (err) {
             res.json({ success: false, message: err });
         } else {
@@ -91,9 +92,9 @@ router.delete('/:id', function (req, res, next) {
     });
 });
 
-//Update Address By Id
+//Update Provider By Id
 router.put('/:id', function (req, res, next) {
-    Address.updateAddress(req.params.id, req.body, function (err, rows) {
+    Provider.updateProvider(req.params.id, req.body, function (err, rows) {
         if (err) {
             res.json({ success: false, message: err });
         } else {

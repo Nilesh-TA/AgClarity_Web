@@ -109,6 +109,12 @@ import { AddAddressComponent } from './components/add-address/add-address.compon
 import { EditAddressComponent } from './components/edit-address/edit-address.component';
 import { ViewAddressComponent } from './components/view-address/view-address.component';
 
+//Provider
+import { ListProviderComponent } from './components/list-provider/list-provider.component';
+import { AddProviderComponent } from './components/add-provider/add-provider.component';
+import { EditProviderComponent } from './components/edit-provider/edit-provider.component';
+import { ViewProviderComponent } from './components/view-provider/view-provider.component';
+
 //Unauthorize Page
 import { UnauthorizeComponent } from './components/unauthorize/unauthorize.component';
 
@@ -493,6 +499,32 @@ export const appRoutes: Routes = [
         component: ListAddressComponent,
         canActivate: [AuthGuard],
         data: { IsSelectCompany: true, Entity: "Address" }
+    },
+
+    //Provider
+    {
+        path: 'add-provider',
+        component: AddProviderComponent,
+        canActivate: [AuthGuard],
+        data: { IsSelectCompany: true, Entity: "Provider" }
+    },
+    {
+        path: 'edit-provider/:id',
+        component: EditProviderComponent,
+        canActivate: [AuthGuard],
+        data: { IsSelectCompany: true, Entity: "Provider" }
+    },
+    {
+        path: 'view-provider/:id',
+        component: ViewProviderComponent,
+        canActivate: [AuthGuard],
+        data: { IsSelectCompany: true, Entity: "Provider" }
+    },
+    {
+        path: 'list-provider',
+        component: ListProviderComponent,
+        canActivate: [AuthGuard],
+        data: { IsSelectCompany: true, Entity: "Provider" }
     },
 
     //Home

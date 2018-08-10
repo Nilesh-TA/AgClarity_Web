@@ -6,31 +6,30 @@ import { SweetAlertOptions } from 'sweetalert2';
 import swal from 'sweetalert2'
 
 //@Services
-import { AddressService } from '../../services/address.service';
+import { ProviderService } from '../../services/provider.service';
 import { CommonService } from '../../services/common.service';
 import { StorageService } from '../../services/storage.service';
-import { ProviderService } from '../../services/provider.service'
 
 //@Models
-import { SearchAddressVM } from '../../models/AddressVM';
+import { SearchProviderVM } from '../../models/ProviderVM';
 
 //@Constant
 import { MICROAPP } from '../../constant/microapp';
 
 @Component({
-  selector: 'app-list-address',
-  templateUrl: './list-address.component.html',
-  styleUrls: ['./list-address.component.css']
+  selector: 'app-list-provider',
+  templateUrl: './list-provider.component.html',
+  styleUrls: ['./list-provider.component.css']
 })
-export class ListAddressComponent implements OnInit {
+export class ListProviderComponent implements OnInit {
 
-  @Input('data') addresses: SearchAddressVM[] = [];
+  @Input('data') providers: SearchProviderVM[] = [];
   pageNo: number = 1;
   pageSize: number = 10;
   totalItems: number = 0;
 
   companyId: number = 0;
-  pageName: string = "Address";
+  pageName: string = "Provider";
   userAccessRole: string = "";
 
   sortColumn: string = "";
@@ -41,8 +40,7 @@ export class ListAddressComponent implements OnInit {
     public microapp: MICROAPP,
     public commonService: CommonService,
     public storageService: StorageService,
-    public providerService: ProviderService,
-    public addressService: AddressService) { }
+    public providerService: ProviderService) { }
 
   ngOnInit() {
     this.companyId = this.storageService.getCompanyId();
@@ -52,7 +50,7 @@ export class ListAddressComponent implements OnInit {
     this.providerService.providerFormData = null;
     this.providerService.newAddressId = null;
 
-    this.getAddresses(1);
+    this.getProviders(1);
   }
 
   sort(key) {
@@ -60,14 +58,14 @@ export class ListAddressComponent implements OnInit {
     this.reverse = !this.reverse;
   }
 
-  getAddresses(page: number) {
+  getProviders(page: number) {
     this.commonService.showLoader();
-    this.addressService.searchAddresses(this.companyId, page, this.pageSize).subscribe(data => {
+    this.providerService.searchProviders(this.companyId, page, this.pageSize).subscribe(data => {
       this.commonService.hideLoader();
       if (data != null) {
         let response: any = data;
         if (response.success) {
-          this.addresses = response.data;
+          this.providers = response.data;
           this.totalItems = response.data.length > 0 ? response.data[0].TotalRows : 0;
           this.pageNo = page;
         } else {
@@ -84,7 +82,7 @@ export class ListAddressComponent implements OnInit {
     });
   }
 
-  deleteAddress(address: SearchAddressVM): void {
+  deleteProvider(provider: SearchProviderVM): void {
 
     const options: SweetAlertOptions = {
       title: 'Are you sure do you want to delete?',
@@ -98,17 +96,17 @@ export class ListAddressComponent implements OnInit {
     swal(options).then((result) => {
       if (result.value) {
         this.commonService.showLoader();
-        this.addressService.deleteAddress(address.ID_address)
+        this.providerService.deleteProvider(provider.ID_provider)
           .subscribe(data => {
             this.commonService.hideLoader();
             if (data != null) {
               let response: any = data;
               if (response.success) {
                 //Track User Action.
-                this.addressService.trackUserAction("delete", this.microapp.Master_Data, this.storageService.getUserProfileId(), address.ID_address, address, address)
+                this.providerService.trackUserAction("delete", this.microapp.Master_Data, this.storageService.getUserProfileId(), provider.ID_provider, provider, provider)
                   .subscribe(res => {
-                    this.addresses = this.addresses.filter(c => c !== address);
-                    this.getAddresses(1);
+                    this.providers = this.providers.filter(c => c !== provider);
+                    this.getProviders(1);
                     this.toastr.success("Record deleted successfully.", "Success!", { timeOut: 3000, closeButton: true });
                   }, error => {
                     this.toastr.error(error.message, "Error!", { timeOut: 3000, closeButton: true });
@@ -130,21 +128,22 @@ export class ListAddressComponent implements OnInit {
 
   };
 
-  editAddress(address: SearchAddressVM): void {
-    this.router.navigate(['/edit-address', address.ID_address]);
+  editProvider(provider: SearchProviderVM): void {
+    this.router.navigate(['/edit-provider', provider.ID_provider]);
   };
 
-  addAddress(): void {
-    this.router.navigate(['/add-address']);
+  addProvider(): void {
+    this.router.navigate(['/add-provider']);
   };
 
-  viewAddress(address: SearchAddressVM): void {
-    this.router.navigate(['/view-address', address.ID_address]);
+  viewProvider(provider: SearchProviderVM): void {
+    this.router.navigate(['/view-provider', provider.ID_provider]);
   };
 
   getPage(page: number) {
     this.sortColumn = '';
     this.reverse = false;
-    this.getAddresses(page);
+    this.getProviders(page);
   }
+
 }

@@ -81,6 +81,10 @@ import { ListAddressComponent } from './components/list-address/list-address.com
 import { AddAddressComponent } from './components/add-address/add-address.component';
 import { EditAddressComponent } from './components/edit-address/edit-address.component';
 import { ViewAddressComponent } from './components/view-address/view-address.component';
+import { ListProviderComponent } from './components/list-provider/list-provider.component';
+import { AddProviderComponent } from './components/add-provider/add-provider.component';
+import { EditProviderComponent } from './components/edit-provider/edit-provider.component';
+import { ViewProviderComponent } from './components/view-provider/view-provider.component';
 
 //@Services
 import { CONFIG } from './constant/config';
@@ -105,6 +109,7 @@ import { LocationService } from './services/location.service';
 import { IrrigationService } from './services/irrigation.service';
 import { WaterSourceService } from './services/water-source.service';
 import { AddressService } from './services/address.service';
+import { ProviderService } from './services/provider.service';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -182,7 +187,11 @@ export function tokenGetter() {
     ListAddressComponent,
     AddAddressComponent,
     EditAddressComponent,
-    ViewAddressComponent,    
+    ViewAddressComponent,
+    ListProviderComponent,
+    AddProviderComponent,
+    EditProviderComponent,
+    ViewProviderComponent,    
   ],
   imports: [
     BrowserModule,
@@ -231,6 +240,7 @@ export function tokenGetter() {
     IrrigationService,
     WaterSourceService,
     AddressService,
+    ProviderService,
     CONFIG,
     REGEXP,
     DICTIONARY,

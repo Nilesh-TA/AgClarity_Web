@@ -1,7 +1,7 @@
 //@Packages
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { ToastrService } from 'ngx-toastr';
 
 //@Services
@@ -10,6 +10,7 @@ import { ErrorService } from '../../services/error.service';
 import { DictionaryService } from '../../services/dictionary.service';
 import { AddressService } from '../../services/address.service';
 import { StorageService } from '../../services/storage.service';
+import { ProviderService } from '../../services/provider.service';
 
 //@Models
 import { DictionaryVM } from '../../models/DictionaryVM';
@@ -18,7 +19,6 @@ import { AddressVM } from '../../models/AddressVM';
 //@Constant
 import { DICTIONARY } from '../../constant/dictionary';
 import { MICROAPP } from '../../constant/microapp';
-import { REGEXP } from '../../constant/regexp';
 
 @Component({
   selector: 'app-add-address',
@@ -27,17 +27,22 @@ import { REGEXP } from '../../constant/regexp';
 })
 export class AddAddressComponent implements OnInit {
 
+  ID_params?: number;
+  action_params: string;
+  source_params: string;
+
   constructor(private router: Router,
+    private route: ActivatedRoute,
     private cdRef: ChangeDetectorRef,
     private fb: FormBuilder,
     private toastr: ToastrService,
     public dictionary: DICTIONARY,
-    public microapp: MICROAPP,
-    public regexp: REGEXP,
+    public microapp: MICROAPP,    
     public commonService: CommonService,
     public storageService: StorageService,
     public errorService: ErrorService,
     public dictionaryService: DictionaryService,
+    public providerService: ProviderService,
     public addressService: AddressService) { }
 
   addForm: FormGroup;
@@ -105,6 +110,13 @@ export class AddAddressComponent implements OnInit {
     this.commonService.showLoader();
     this.companyId = this.storageService.getCompanyId();
 
+    this.route.queryParams.subscribe(params => {
+      this.ID_params = !this.commonService.isNullOrEmpty(params["id"]) ? +params["id"] : 0;
+      this.companyId = !this.commonService.isNullOrEmpty(params["company"]) ? +params["company"] : 0;
+      this.action_params = params["action"];
+      this.source_params = params["source"];
+    });
+
     //Bind dropdown values    
     Promise.all(
       [
@@ -156,11 +168,13 @@ export class AddAddressComponent implements OnInit {
         if (data.success) {
           const insertedId = data.data.insertId;
 
+          this.providerService.newAddressId = insertedId;
+
           //Track User Action.
           this.addressService.trackUserAction("add", this.microapp.Master_Data, this.storageService.getUserProfileId(), insertedId, body, body)
             .subscribe(res => {
               this.toastr.success("Address created successfully.", "Success!", { timeOut: 3000, closeButton: true });
-              this.router.navigate(['list-address']);
+              this.backToList();
             }, error => {
               this.toastr.error(error.message, "Error!", { timeOut: 3000, closeButton: true });
             });
@@ -193,7 +207,19 @@ export class AddAddressComponent implements OnInit {
   backToList() {
     this.addForm.reset();
     this.commonService.hideLoader();
-    this.router.navigate(['list-address']);
+
+    if (!this.commonService.isNullOrEmpty(this.source_params)) {
+      if (this.source_params == "provider") {
+        if (this.providerService.pageSource == "add") {          
+          this.router.navigate(['add-provider']);          
+        }
+        else if (this.providerService.pageSource == "edit") {
+          this.router.navigate(['/edit-provider', this.ID_params]);
+        }
+      }
+    }else{
+      this.router.navigate(['list-address']);
+    }
   }
 
 }

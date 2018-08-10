@@ -1,0 +1,98 @@
+<div class="wrraper top-wrap clearfix">
+
+  <!-- Dropdowns -->
+  <app-common-nav-top [masterData]="pageName"></app-common-nav-top>
+  <!-- Dropdowns -->
+
+  <div class="box-sensors-indicators tasks">
+    <!-- table alerts -->
+    <div class="table-responsive box-table">
+      <table class="table-recom table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Action</th>
+            <th scope="col" (click)="sort('name')">
+              Supplier Name
+              <i class="fa fa-sm mt-2" *ngIf="sortColumn =='name'" [ngClass]="{'fa-chevron-up':!reverse,'fa-chevron-down':reverse}"></i>
+            </th>
+            <th scope="col" (click)="sort('related_to_name')">
+              Related To
+              <i class="fa fa-sm mt-2" *ngIf="sortColumn =='related_to_name'" [ngClass]="{'fa-chevron-up':!reverse,'fa-chevron-down':reverse}"></i>
+            </th>
+            <th scope="col" (click)="sort('address')">
+              Address
+              <i class="fa fa-sm mt-2" *ngIf="sortColumn =='address'" [ngClass]="{'fa-chevron-up':!reverse,'fa-chevron-down':reverse}"></i>
+            </th>
+            <th scope="col" (click)="sort('city')">
+              City
+              <i class="fa fa-sm mt-2" *ngIf="sortColumn =='city'" [ngClass]="{'fa-chevron-up':!reverse,'fa-chevron-down':reverse}"></i>
+            </th>
+            <th scope="col" (click)="sort('state')">
+              State
+              <i class="fa fa-sm mt-2" *ngIf="sortColumn =='state'" [ngClass]="{'fa-chevron-up':!reverse,'fa-chevron-down':reverse}"></i>
+            </th>
+            <th scope="col" (click)="sort('country')">
+              Country
+              <i class="fa fa-sm mt-2" *ngIf="sortColumn =='country'" [ngClass]="{'fa-chevron-up':!reverse,'fa-chevron-down':reverse}"></i>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let provider of providers | orderBy: sortColumn : reverse | paginate: { id: 'paging', itemsPerPage: pageSize, currentPage: pageNo, totalItems: totalItems }">
+            <th scope="row">
+              <ul>
+                <li class="item-list-ch item-list-add" *ngIf="commonService.hasUpdateAccess(userAccessRole)">
+                  <a (click)="editProvider(provider);"></a>
+                </li>
+                <li class="item-list-ch item-list-delete" *ngIf="commonService.hasDeleteAccess(userAccessRole)">
+                  <a (click)="deleteProvider(provider);"></a>
+                </li>
+                <li class="item-list-ch item-list-user" *ngIf="commonService.hasReadAccess(userAccessRole)">
+                  <a (click)="viewProvider(provider);"></a>
+                </li>
+              </ul>
+            </th>
+            <td>
+              {{ provider.name }}
+            </td>
+            <td>
+              {{ provider.related_to_name }}
+            </td>
+            <td>
+              {{ provider.address }}
+            </td>
+            <td>
+              {{ provider.city }}
+            </td>
+            <td>
+              {{ provider.state }}
+            </td>
+            <td>
+              {{ provider.country }}
+            </td>
+          </tr>
+          <tr *ngIf="providers.length == 0">
+            <th></th>
+            <td colspan="6" class="text-center">No records found.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="col-sm-12 row pr0">
+        <div class="col-md-8 form-group">
+          <pagination-controls id="paging" (pageChange)="getPage($event)" *ngIf="providers.length > 0"></pagination-controls>
+        </div>
+        <div class="col-md-4 form-group text-right pr0">
+          <!-- //table alerts -->
+          <div class="add-task-box" *ngIf="commonService.hasCreateAccess(userAccessRole)">
+            <a href="javascript:void(0);" (click)="addProvider();" class="cl-green">
+              <span>
+                <i class="fa fa-plus add_icon" title="Add New Provider"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

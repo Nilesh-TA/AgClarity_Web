@@ -18,7 +18,6 @@ import { AddressVM } from '../../models/AddressVM';
 //@Constant
 import { DICTIONARY } from '../../constant/dictionary';
 import { MICROAPP } from '../../constant/microapp';
-import { REGEXP } from '../../constant/regexp';
 
 
 @Component({
@@ -34,8 +33,7 @@ export class EditAddressComponent implements OnInit {
     private fb: FormBuilder,
     private toastr: ToastrService,
     public dictionary: DICTIONARY,
-    public microapp: MICROAPP,
-    public regexp: REGEXP,
+    public microapp: MICROAPP,    
     public commonService: CommonService,
     public storageService: StorageService,
     public errorService: ErrorService,

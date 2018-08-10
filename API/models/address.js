@@ -39,6 +39,9 @@ let Address = {
     getAddressById: function (id, callback) {
         return db.query("SELECT * FROM \`address\` WHERE IFNULL(isdeleted,0) = 0 AND `ID_address`=?", [id], callback);
     },
+    getAddressByCompany: function (company, callback) {
+        return db.query("SELECT * FROM \`address\` WHERE IFNULL(isdeleted,0) = 0 AND IFNULL(company, 0) = ? ORDER BY `ID_address` ", [company], callback);
+    },
     addAddress: function (Address, callback) {
         return db.query(`INSERT INTO \`address\`
                             (

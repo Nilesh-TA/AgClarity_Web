@@ -67,6 +67,9 @@ export class AppLeftMenuComponent implements OnInit {
         case "Address":
           this.router.navigate(['list-address']);
           break;
+        case "Provider":
+          this.router.navigate(['list-provider']);
+          break;
       }
     }
   }

@@ -15,7 +15,6 @@ import { AddressVM } from '../../models/AddressVM';
 //@Constant
 import { DICTIONARY } from '../../constant/dictionary';
 import { MICROAPP } from '../../constant/microapp';
-import { REGEXP } from '../../constant/regexp';
 
 @Component({
   selector: 'app-view-address',
@@ -29,8 +28,7 @@ export class ViewAddressComponent implements OnInit {
     private cdRef: ChangeDetectorRef,
     private fb: FormBuilder,    
     public dictionary: DICTIONARY,
-    public microapp: MICROAPP,
-    public regexp: REGEXP,
+    public microapp: MICROAPP,    
     public commonService: CommonService,        
     public dictionaryService: DictionaryService,
     public addressService: AddressService) { }
@@ -78,7 +76,7 @@ export class ViewAddressComponent implements OnInit {
 
     this.route.params.subscribe(params => { this.ID_address = +params['id']; });
 
-    //Bind dropdown values & get address detail by id
+    //Bind dropdown values & get provider detail by id
     Promise.all(
       [
         this.getCountry(),

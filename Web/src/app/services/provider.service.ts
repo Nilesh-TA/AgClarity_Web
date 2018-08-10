@@ -7,17 +7,18 @@ import { map, catchError } from 'rxjs/operators';
 import { CONFIG } from '../constant/config';
 
 //@Model
-import { AddressVM } from '../models/AddressVM';
+import { ProviderVM } from '../models/ProviderVM';
 
 //@Services
 import { HttpService } from './http.service';
 import { SecureService } from './secure.service';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
-export class AddressService {
+export class ProviderService {
 
   private apiUrl: string;
 
@@ -27,134 +28,139 @@ export class AddressService {
     this.apiUrl = _api.ServerWithApiUrl;
   }
 
-  searchAddresses(company: number, pageno: number, pagesize: number) {
+  public providerFormData: any;
+  public newAddressId: any;
+  public pageSource: any;
+
+  searchProviders(company: number, pageno: number, pagesize: number) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     this._api.setAuthHeader(headers);
 
-    return this._httpService.get(`${this.apiUrl}address?company=${company}&pageno=${pageno}&pagesize=${pagesize}`, { headers: headers })
+    return this._httpService.get(`${this.apiUrl}provider?company=${company}&pageno=${pageno}&pagesize=${pagesize}`, { headers: headers })
       .pipe(
         map((response: any) => {
           return response.json();
         }), catchError((errorRes: any) => {
-          return this._secureService.handleError(errorRes, `${this.apiUrl}address?company=${company}&pageno=${pageno}&pagesize=${pagesize}`);
+          return this._secureService.handleError(errorRes, `${this.apiUrl}provider?company=${company}&pageno=${pageno}&pagesize=${pagesize}`);
         })
       );
   }
 
-  getAddresses() {
+  getProviders() {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     this._api.setAuthHeader(headers);
 
-    return this._httpService.get(`${this.apiUrl}address/GetAddresses`, { headers: headers })
+    return this._httpService.get(`${this.apiUrl}provider/GetProviders`, { headers: headers })
       .pipe(
         map((response: any) => {
           return response.json();
         }), catchError((errorRes: any) => {
-          return this._secureService.handleError(errorRes, `${this.apiUrl}address/GetAddresses`);
+          return this._secureService.handleError(errorRes, `${this.apiUrl}provider/GetProviders`);
         })
       );
   }
 
-  getAddressById(id: number) {
+  getProvidersByCompany(companyId: number, id: number) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     this._api.setAuthHeader(headers);
 
-    return this._httpService.get(`${this.apiUrl}address/${id}`, { headers: headers })
+    return this._httpService.get(`${this.apiUrl}provider/GetProvidersByCompany?company=${companyId}&id=${id}`, { headers: headers })
       .pipe(
         map((response: any) => {
           return response.json();
         }), catchError((errorRes: any) => {
-          return this._secureService.handleError(errorRes, `${this.apiUrl}address/${id}`);
+          return this._secureService.handleError(errorRes, `${this.apiUrl}provider/GetProvidersByCompany?company=${companyId}&id=${id}`);
         })
       );
   }
 
-  getAddressByCompany(companyId: number) {
+  getProviderById(id: number) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     this._api.setAuthHeader(headers);
 
-    return this._httpService.get(`${this.apiUrl}address/GetAddressByCompany?company=${companyId}`, { headers: headers })
+    return this._httpService.get(`${this.apiUrl}provider/${id}`, { headers: headers })
       .pipe(
         map((response: any) => {
           return response.json();
         }), catchError((errorRes: any) => {
-          return this._secureService.handleError(errorRes, `${this.apiUrl}address/GetAddressByCompany?company=${companyId}`);
+          return this._secureService.handleError(errorRes, `${this.apiUrl}provider/${id}`);
         })
       );
   }
 
-  createAddress(Address: AddressVM) {
+  createProvider(Provider: ProviderVM) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     this._api.setAuthHeader(headers);
 
-    const postBody = JSON.stringify(Address);
+    const postBody = JSON.stringify(Provider);
 
-    return this._httpService.post(`${this.apiUrl}address`, postBody, { headers: headers })
+    return this._httpService.post(`${this.apiUrl}provider`, postBody, { headers: headers })
       .pipe(
         map((response: any) => {
           return response.json();
         }), catchError((errorRes: any) => {
-          return this._secureService.handleError(errorRes, `${this.apiUrl}address`);
+          return this._secureService.handleError(errorRes, `${this.apiUrl}provider`);
         })
       );
   }
 
-  updateAddress(Address: AddressVM) {
+  updateProvider(Provider: ProviderVM) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     this._api.setAuthHeader(headers);
 
-    const postBody = JSON.stringify(Address);
+    const postBody = JSON.stringify(Provider);
 
-    return this._httpService.put(`${this.apiUrl}address/${Address.ID_address}`, postBody, { headers: headers })
+    return this._httpService.put(`${this.apiUrl}provider/${Provider.ID_provider}`, postBody, { headers: headers })
       .pipe(
         map((response: any) => {
           return response.json();
         }), catchError((errorRes: any) => {
-          return this._secureService.handleError(errorRes, `${this.apiUrl}address/${Address.ID_address}`);
+          return this._secureService.handleError(errorRes, `${this.apiUrl}provider/${Provider.ID_provider}`);
         })
       );
   }
 
-  deleteAddress(id: number) {
+  deleteProvider(id: number) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     this._api.setAuthHeader(headers);
 
-    return this._httpService.delete(`${this.apiUrl}address/${id}`, { headers: headers })
+    return this._httpService.delete(`${this.apiUrl}provider/${id}`, { headers: headers })
       .pipe(
         map((response: any) => {
           return response.json();
         }), catchError((errorRes: any) => {
-          return this._secureService.handleError(errorRes, `${this.apiUrl}address/${id}`);
+          return this._secureService.handleError(errorRes, `${this.apiUrl}provider/${id}`);
         })
       );
   }
 
-  trackUserAction(action, appname, user, id, oldAddress: any, newAddress: any) {
+  trackUserAction(action, appname, user, id, oldProvider: any, newProvider: any) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     this._api.setAuthHeader(headers);
 
     let obj = {
-      old: oldAddress,
-      new: newAddress
+      old: oldProvider,
+      new: newProvider
     }
 
     const postBody = JSON.stringify(obj);
 
-    return this._httpService.post(`${this.apiUrl}address/TrackUserAction?action=${action}&appname=${appname}&user=${user}&id=${id}`, postBody, { headers: headers })
+    return this._httpService.post(`${this.apiUrl}provider/TrackUserAction?action=${action}&appname=${appname}&user=${user}&id=${id}`, postBody, { headers: headers })
       .pipe(
         map((response: any) => {
           return response.json();
         }), catchError((errorRes: any) => {
-          return this._secureService.handleError(errorRes, `${this.apiUrl}address/TrackUserAction?action=${action}&appname=${appname}&user=${user}&id=${id}`);
+          return this._secureService.handleError(errorRes, `${this.apiUrl}provider/TrackUserAction?action=${action}&appname=${appname}&user=${user}&id=${id}`);
         })
       );
   }
+
 }
